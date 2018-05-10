@@ -1,0 +1,70 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "stateful - Convert to stateful component",
+      "type": "shell",
+      "command":
+        "node ${workspaceFolder}/scripts/convert-to-stateful-component ${file}",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "stateless - Convert to stateless component",
+      "type": "shell",
+      "command":
+        "node ${workspaceFolder}/scripts/convert-to-stateless-component ${file}",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "component - Create new component",
+      "type": "shell",
+      "command": "node ${workspaceFolder}/scripts/create-component",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mock - Create new mockup page",
+      "type": "shell",
+      "command": "node ${workspaceFolder}/scripts/create-mockup-page",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Rename component",
+      "type": "shell",
+      "command":
+        "node ${workspaceFolder}/scripts/rename-component ${fileBasenameNoExtension}",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "plugins": [
+    "babel-plugin-lodash",
+    "babel-plugin-transform-class-properties",
+    "babel-plugin-transform-object-rest-spread"
+  ],
+  "presets": [
+    [
+      "env",
+      {
+        "debug": false,
+        "targets": {
+          "browsers": ["last 2 versions"]
+        },
+        "useBuiltIns": true
+      }
+    ],
+    "react"
+  ]
+}

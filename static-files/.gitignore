@@ -1,0 +1,8 @@
+.DS_Store
+dist
+node_modules
+source/app.components.js
+source/mockup/pages/pages.js
+*.code-workspace
+.vscode/*
+!.vscode/tasks.json

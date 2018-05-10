@@ -1,0 +1,32 @@
+@mixin cf() {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  left: -999em;
+  clip: rect(0, 0, 0, 0);
+  opacity: 0;
+  overflow: hidden;
+}
+
+@mixin focus-outline {
+  outline: 1px dotted #212121;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+@mixin quantity-selector($selector-base, $quantity) {
+  #{$selector-base}:nth-last-child(#{$quantity}):first-child,
+  #{$selector-base}:nth-last-child(#{$quantity}):first-child
+    ~ #{$selector-base} {
+    @content;
+  }
+}

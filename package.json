@@ -1,0 +1,38 @@
+{
+  "name": "@creuna/create-react-project",
+  "version": "1.0.0",
+  "author": {
+    "name": "Asbjorn Hegdahl",
+    "email": "asbjorn.hegdahl@creuna.no"
+  },
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "rm -rf dist && node ./index.js dist",
+    "lint": "eslint --ext js,jsx ./source",
+    "lint:fix": "eslint --ext js,jsx ./source --fix"
+  },
+  "dependencies": {
+    "@creuna/utils": "^0.2.3",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.2",
+    "babel-plugin-lodash": "^3.3.2",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-shorthand-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.23.0",
+    "babel-register": "^6.26.0",
+    "chalk": "^2.1.0",
+    "eslint": "^4.15.0",
+    "eslint-config-prettier": "^2.2.0",
+    "eslint-loader": "^1.7.0",
+    "eslint-plugin-prettier": "^2.4.0",
+    "fs-extra": "^6.0.1",
+    "klaw": "^2.1.0",
+    "lodash": "^4.17.4",
+    "prettier": "^1.9.2"
+  }
+}
