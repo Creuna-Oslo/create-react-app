@@ -15,7 +15,7 @@
 ## Options
 
 ### ✏️ Project name
-This will be used in `package.json` as well for `<title>` in the mockup and `<h1>` on the mockup frontpage.
+This will be used in `package.json` as well as for `<title>` in the mockup and `<h1>` on the mockup frontpage.
 
 ---
 
@@ -88,7 +88,7 @@ This will push `analyticsData` to `window.dataLayer`. `send` supports both objec
 }
 ```
 
-If you format your API response in the following way, `analytics` will be pushed to `window.dataLayer` automatically. When a `payload` object is present in the response, only the content of `payload` will be returned from `api.execute`.
+If you format your API response in the following way, `analytics` will be pushed to `window.dataLayer` automatically.
 
 ---
 
