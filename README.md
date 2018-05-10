@@ -5,7 +5,7 @@ React app boilerplate
 Run the builder:
 
 ```console
-yarn build dist
+yarn build
 ```
 
 Will create `dist` and build there.
