@@ -63,9 +63,9 @@ prompt(
   }) => {
     copySync(path.join(__dirname, 'static-files'), buildDirectory, {
       filter: src => {
-        const isAnalyticsFile =
-          src.includes('js/analytics.js') || src.includes('components/message');
-        const isMessengerFile = src.includes('js/messenger.js');
+        const isAnalyticsFile = src.includes('js/analytics.js');
+        const isMessengerFile =
+          src.includes('js/messenger.js') || src.includes('components/message');
         const isIconFile =
           src.includes('components/icon') ||
           src.includes('assets/icons/icons.js');
