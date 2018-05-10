@@ -15,10 +15,6 @@ const createWebpackConfig = require('./source/webpack/create-webpack-config');
 
 const buildDirectory = path.join(__dirname, process.argv[2] || '.');
 
-if (!fs.existsSync(buildDirectory)) {
-  fs.mkdirSync(buildDirectory);
-}
-
 prompt(
   {
     projectName: {
@@ -47,7 +43,7 @@ prompt(
       type: Boolean
     },
     useInlineSvg: {
-      text: '🖼️  Use inline SVG icons in React?',
+      text: '☢️  Use inline SVG icons in React?',
       type: Boolean
     }
   },
@@ -61,6 +57,10 @@ prompt(
     useMessenger,
     useResponsiveImages
   }) => {
+    if (!fs.existsSync(buildDirectory)) {
+      fs.mkdirSync(buildDirectory);
+    }
+
     copySync(path.join(__dirname, 'static-files'), buildDirectory, {
       filter: src => {
         const isAnalyticsFile = src.includes('js/analytics.js');
