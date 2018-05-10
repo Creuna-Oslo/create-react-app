@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "stateful - Convert to stateful component",
+      "label": "to-stateful - Convert to stateful component",
       "type": "shell",
       "command":
         "node ${workspaceFolder}/scripts/convert-to-stateful-component ${file}",
@@ -17,7 +17,7 @@
       "problemMatcher": []
     },
     {
-      "label": "stateless - Convert to stateless component",
+      "label": "to-stateless - Convert to stateless component",
       "type": "shell",
       "command":
         "node ${workspaceFolder}/scripts/convert-to-stateless-component ${file}",
@@ -42,7 +42,7 @@
       "problemMatcher": []
     },
     {
-      "label": "mock - Create new mockup page",
+      "label": "mockup - Create new mockup page",
       "type": "shell",
       "command": "node ${workspaceFolder}/scripts/create-mockup-page",
       "presentation": {
