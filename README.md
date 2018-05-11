@@ -47,7 +47,7 @@ If you select this, `source/js/messenger.js` and `source/components/message` wil
 #### Usage:
 For the messenger helper to work, API responses have to be formatted as follows:
 
-```json
+```
 {
   "success": true,
   "messageToUser": "Your request succeeded!",
@@ -77,7 +77,7 @@ This will push `analyticsData` to `window.dataLayer`. `send` supports both objec
 
 #### With API-helper
 
-```json
+```
 {
   "analytics": {
     // some analytics data here
