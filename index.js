@@ -13,7 +13,8 @@ const createHomeComponent = require('./source/home-component/create-home-compone
 const createPackage = require('./source/package/create-package');
 const createWebpackConfig = require('./source/webpack/create-webpack-config');
 
-const buildDirectory = path.join(process.cwd(), process.argv[2] || '.');
+const buildDir = path.join(process.cwd(), process.argv[2] || '.');
+const sourceDir = path.join(__dirname, 'source');
 
 prompt(
   {
@@ -57,11 +58,11 @@ prompt(
     useMessenger,
     useResponsiveImages
   }) => {
-    if (!fs.existsSync(buildDirectory)) {
-      fs.mkdirSync(buildDirectory);
+    if (!fs.existsSync(buildDir)) {
+      fs.mkdirSync(buildDir);
     }
 
-    copySync(path.join(__dirname, 'static-files'), buildDirectory, {
+    copySync(path.join(__dirname, 'static-files'), buildDir, {
       filter: src => {
         const isAnalyticsFile = src.includes('js/analytics.js');
         const isMessengerFile =
@@ -93,13 +94,13 @@ prompt(
 
     // webpack.config.js
     fs.writeFileSync(
-      path.join(buildDirectory, 'webpack.config.js'),
+      path.join(buildDir, 'webpack.config.js'),
       createWebpackConfig(useInlineSvg)
     );
 
     // package.json
     fs.writeFileSync(
-      path.join(buildDirectory, 'package.json'),
+      path.join(buildDir, 'package.json'),
       createPackage({
         authorEmail,
         authorName,
@@ -113,53 +114,53 @@ prompt(
     // eslintrc
     // This was moved to 'source' because it messed up autoformatting when editing files in 'static-files'
     fs.copyFileSync(
-      path.join(__dirname, 'source/eslintrc/.eslintrc.json'),
-      path.join(buildDirectory, '.eslintrc.json')
+      path.join(sourceDir, 'eslintrc/.eslintrc.json'),
+      path.join(buildDir, '.eslintrc.json')
     );
 
     // api-helper
     if (useApiHelper) {
       fs.writeFileSync(
-        path.join(buildDirectory, 'source/js/api-helper.js'),
+        path.join(buildDir, 'source/js/api-helper.js'),
         createApiHelper({ useAnalyticsHelper, useMessenger })
       );
     }
 
     // app.jsx
     fs.writeFileSync(
-      path.join(buildDirectory, 'source/mockup/app.jsx'),
+      path.join(buildDir, 'source/mockup/app.jsx'),
       createAppComponent(projectName)
     );
 
     // home.jsx
     fs.writeFileSync(
-      path.join(buildDirectory, 'source/mockup/pages/home.jsx'),
+      path.join(buildDir, 'source/mockup/pages/home.jsx'),
       createHomeComponent(projectName)
     );
 
     // prompt-script
     fs.copyFileSync(
       path.join(__dirname, 'utils/prompt.js'),
-      path.join(buildDirectory, 'scripts/prompt.js')
+      path.join(buildDir, 'scripts/prompt.js')
     );
 
     // fluid-image
-    const fluidImageDir = path.join(
-      buildDirectory,
+    const fluidImageBuildDir = path.join(
+      buildDir,
       'source/components/fluid-image'
     );
-    fs.mkdirSync(fluidImageDir);
+    fs.mkdirSync(fluidImageBuildDir);
     fs.writeFileSync(
-      path.join(fluidImageDir, 'fluid-image.jsx'),
+      path.join(fluidImageBuildDir, 'fluid-image.jsx'),
       createFluidImage(useResponsiveImages)
     );
     fs.copyFileSync(
-      path.join(__dirname, 'source/fluid-image/fluid-image.scss'),
-      path.join(fluidImageDir, 'fluid-image.scss')
+      path.join(sourceDir, 'fluid-image/fluid-image.scss'),
+      path.join(fluidImageBuildDir, 'fluid-image.scss')
     );
     fs.copyFileSync(
-      path.join(__dirname, 'source/fluid-image/index.js'),
-      path.join(fluidImageDir, 'index.js')
+      path.join(sourceDir, 'fluid-image/index.js'),
+      path.join(fluidImageBuildDir, 'index.js')
     );
   }
 );
