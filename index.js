@@ -13,7 +13,7 @@ const createHomeComponent = require('./source/home-component/create-home-compone
 const createPackage = require('./source/package/create-package');
 const createWebpackConfig = require('./source/webpack/create-webpack-config');
 
-const buildDirectory = path.join(__dirname, process.argv[2] || '.');
+const buildDirectory = path.join(process.cwd(), process.argv[2] || '.');
 
 prompt(
   {
