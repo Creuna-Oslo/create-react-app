@@ -3,7 +3,6 @@
     "baseUrl": ".",
     "paths": {
       "components/*": ["./source/components/*"],
-      "utils/*": ["./source/js/utils/*"],
       "js/*": ["./source/js/*"]
     }
   },

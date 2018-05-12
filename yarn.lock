@@ -78,10 +78,6 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@creuna/utils@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@creuna/utils/-/utils-0.2.3.tgz#b5dfb1891f523134573a4791ac6271ca17c82c7c"
-
 acorn-jsx@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"
@@ -1163,7 +1159,7 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
+graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
@@ -1324,12 +1320,6 @@ jsonfile@^4.0.0:
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
   optionalDependencies:
     graceful-fs "^4.1.6"
-
-klaw@^2.1.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/klaw/-/klaw-2.1.1.tgz#42b76894701169cc910fd0d19ce677b5fb378af1"
-  dependencies:
-    graceful-fs "^4.1.9"
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"

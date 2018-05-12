@@ -17,7 +17,7 @@ module.exports = function({
   return content
     .replace('$projectName', projectName)
     .replace('$author', `${authorName} <${authorEmail}>`)
-    .split('\n')
+    .split(/(?:\r\n|\r|\n)/g)
     .reduce((accum, line) => {
       if (!useMessenger && line.includes('"pubsub-js":')) {
         return accum;

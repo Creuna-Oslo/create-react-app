@@ -1,16 +1,26 @@
 # create-react-app
 
->React app boilerplate
+[![npm version](https://img.shields.io/npm/v/@creuna/create-react-app.svg?style=flat)](https://www.npmjs.com/package/@creuna/create-react-app)
 
-<!--
-## Steps
-1. `npm install -g @creuna/create-react-app`
-1. `cd` to project folder
-1. `@creuna/create-react-app`
-1. answer all the questions
-1. `yarn`
-1. `yarn dev`
--->
+React app boilerplate
+
+## Usage
+#### Install
+```
+npm install -g @creuna/create-react-app
+```
+
+#### Create new app
+```
+create-creuna-react-app
+```
+
+This will install files to the **current working directory**, so make sure you `cd` to where you want to install. Alternatively, you can provide a path like this (relative to the current working directory):
+
+```
+create-creuna-react-app projects/my-project
+```
+
 
 ## Options
 
@@ -106,6 +116,67 @@ If you select this, `source/components/icon` and `source/assets/icons/icons.js` 
 
 ---
 
+## Project structure
+#### React components
+Put React components in `source/components`. It is recommended to have each component in a separate folder, containing a `jsx` file, a `scss` file and an `index.js` file.
+
+If the folder and the `jsx` file have the same name, the component will be included in the generated `app.components.js` file which can be used to render components on a backend (like React.NET).
+
+#### Assets
+Put your assets like fonts, icons and logos in `source/assets`. Mockup content assets can be put in `source/mockup/assets`. Webpack copies everything from `source/mockup/assets` to `/mockup/assets`, so you can refer to your mockup files like this:
+
+```json
+{
+  "imageUrl": "/mockup/assets/my-image.jpg"
+}
+```
+
+#### Mockup
+Before Webpack dev server runs, the frontpage of the mockup will be generated. All mockup pages that have a folder and a component of the same name as well as an `index.js` file will get a link on the frontpage. You can customize the name and group name in the `jsx` file by adding a comment to the first line like this:
+
+```js
+// Group name/Page name
+
+```
+
+Pages with the same group name will be grouped on the frontpage.
+
+#### Mocking API responses
+Webpack will copy everything from `source/mockup/api` to `/mockup/api` you can reference your mock API responses like this:
+
+```json
+{
+  "apiEndpoint": "/mockup/api/register-user.json"
+}
+```
+
+
+## Aliases
+By default, two aliases are included:
+
+* `components` which resolves to `source/app/components`
+* `js` which resolves to `source/js`
+
+These aliases allow you to do this from any `js`/`jsx` file:
+
+```
+import SomeComponent from 'components/some-component';
+import someScript from 'js/some-script';
+```
+
+These aliases are also included in `jsconfig.json` which makes VS Code resolve the aliases, giving you autocomplete.
+
+
+## Input detection
+`js/input-detection.js` is included in both the `client` and `static` bundles. It checks for mouse, touch and keyboard events and puts classnames on `<html>`:
+
+* `.mouse-user`: The last event was either a mouse or touch event
+* `.touchevents`: The last event was a touch event
+* `.no-touchevents`: The last event was not a touch event By default, all focus outlines are disabled in `site.scss` when the `.mouse-user` class is present.
+
+You can use these to provide alternative styling based on input method (like disable hover effects for touch screens).
+
+
 ## Scripts
 Included is a couple of utility scripts for lazy people. You can use these from the terminal or within VS Code if you use that.
 
@@ -145,21 +216,3 @@ If you're using VS Code, you can run the above scripts from within the editor. R
 Open the Command Pallette (`View -> Command Pallette`) or `⇧⌘P`, type `run task` and select `Tasks: Run Task`. Then, start typing the name of the script you want to run, like `rename` or `component` and press return when you see the right one. This will open a terminal window inside Code, which can be closed by pressing any key once the script has finished.
 
 If you want to run the scripts from within Code, it's a good idea to map the `Run Task` command to a keyboard shortcut, to avoid excessive typing.
-
-## Assets
-Put your assets like fonts, icons and logos in `source/assets`. Mockup content assets can be put in `source/mockup/assets`. Webpack copies everything from `source/mockup/assets` to `/mockup/assets`, so you can refer to your mockup files like this:
-
-```json
-{
-  "imageUrl": "/mockup/assets/my-image.jpg"
-}
-```
-
-## Mocking API responses
-Webpack will copy everything from `source/mockup/api` to `/mockup/api` you can reference your mock API responses like this:
-
-```json
-{
-  "apiEndpoint": "/mockup/api/register-user.json"
-}
-```
