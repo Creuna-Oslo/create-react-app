@@ -1,8 +1,8 @@
 # create-react-app
 
-[![npm version](https://img.shields.io/npm/v/@creuna/create-react-app.svg?style=flat)](https://www.npmjs.com/package/@creuna/create-react-app)
-
 React app boilerplate
+
+[![npm version](https://img.shields.io/npm/v/@creuna/create-react-app.svg?style=flat)](https://www.npmjs.com/package/@creuna/create-react-app)
 
 ## Usage
 #### Install
