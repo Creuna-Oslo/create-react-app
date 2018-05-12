@@ -87,6 +87,8 @@ This will push `analyticsData` to `window.dataLayer`. `send` supports both objec
 
 #### With API-helper
 
+If you format your API response in the following way (or make another human do so), `analytics` will be pushed to `window.dataLayer` automatically.
+
 ```
 {
   "analytics": {
@@ -98,21 +100,23 @@ This will push `analyticsData` to `window.dataLayer`. `send` supports both objec
 }
 ```
 
-If you format your API response in the following way, `analytics` will be pushed to `window.dataLayer` automatically.
-
 ---
 
 ### 🖼️ Include responsive images helper?
-If you select this, `source/js/responsive-images.js` and `source/components/image` will be included. `source/components/fluid-image` will also work with this. These are intended to be used with the image resizer plugin to EPiServer. `responsive-images.js` measures images and returns a URL to a resized image. The `Image` and `FluidImage` components do the same thing on mount.
+If you select this, `source/js/responsive-images.js` and `source/components/image` will be included. `source/components/fluid-image` will also work with this. These are intended to be used with the image resizer plugin to EPiServer. `responsive-images.js` measures images and returns a URL to a resized image using query parameters. The `Image` and `FluidImage` components do the same thing on mount.
 
 ---
 
 ### ☢️ Use inline SVG icons in React?
-If you select this, `source/components/icon` and `source/assets/icons/icons.js` will be included, as well as some npm packages. The `Icon` component will render an svg inline. You use it by putting SVG files in `source/assets/icons` and referencing use the filename as `name` to the `Icon` component:
+If you select this, `source/components/icon` and `source/assets/icons/icons.js` will be included, as well as some npm packages. The `Icon` component will render an svg inline. You use it by putting SVG files in `source/assets/icons` and using the filename as `name` to the `Icon` component:
 
 ```jsx
 <Icon name="my-icon" /> // Renders source/assets/icons/my-icon.svg inline
 ```
+
+By default, the `Icon` component will render using the inherited text color as fill color. This makes setting the color of the rendered icon easy because you can just set `color` on the svg or one of its parent elements.
+
+**NOTE**: By default, this component does not work well with SVGs using stroke instead of fill. If you want to use stroked icons, you'll need to do edit `icon.scss` and maybe tweak the options for the `svgo-loader` in `webpack.config`
 
 ---
 
@@ -152,12 +156,12 @@ Webpack will copy everything from `source/mockup/api` to `/mockup/api` you can r
 
 
 ## Aliases
-By default, two aliases are included:
+By default, two aliases are included in `webpack.config`:
 
-* `components` which resolves to `source/app/components`
+* `components` which resolves to `source/components`
 * `js` which resolves to `source/js`
 
-These aliases allow you to do this from any `js`/`jsx` file:
+These aliases allow you to import like this from any `js`/`jsx` file:
 
 ```
 import SomeComponent from 'components/some-component';
@@ -170,34 +174,50 @@ These aliases are also included in `jsconfig.json` which makes VS Code resolve t
 ## Input detection
 `js/input-detection.js` is included in both the `client` and `static` bundles. It checks for mouse, touch and keyboard events and puts classnames on `<html>`:
 
-* `.mouse-user`: The last event was either a mouse or touch event
+* `.mouse-user`: The last event was either a mouse or touch event (this is removed when a keyboard event occurs)
 * `.touchevents`: The last event was a touch event
-* `.no-touchevents`: The last event was not a touch event By default, all focus outlines are disabled in `site.scss` when the `.mouse-user` class is present.
+* `.no-touchevents`: The last event was not a touch event
 
-You can use these to provide alternative styling based on input method (like disable hover effects for touch screens).
+By default, all focus outlines are disabled when the `.mouse-user` class is present (in `site.scss`). No class names are present if js is disabled in the browser, meaning focus outlines are preserved.
+
+You can use these classnames to provide alternative styling based on input method (like disabling hover effects for touch screens).
 
 
 ## Scripts
-Included is a couple of utility scripts for lazy people. You can use these from the terminal or within VS Code if you use that.
+Included is a couple of utility scripts for lazy people. You can use these from the terminal or from within VS Code if you use that.
 
 ### Create new component
 
-`yarn component component-name` creates the folder `source/components/component-name` and puts `component-name.jsx`, `component-name.scss` and `index.js` inside it. Sweeeeeet 🤩. You do need to restart webpack dev server in order for the `scss` file to be included.
+`yarn component component-name`
+
+This creates the folder `source/components/component-name` and puts `component-name.jsx`, `component-name.scss` and `index.js` inside it. Sweeeeeet! 😄 You do need to restart webpack dev server in order for the `scss` file to be noticed by webpack.
 
 ---
 
 ### Create new mockup page
-Works much like the above script, but does not create a `.scss` file and creates a `.json` file for mockup data instead. Usage: `yarn mockup page-name`. You need to restart webpack dev server in order for the new page to show up on the front page of the mockup.
+`yarn mockup page-name`
+
+Works much like the above script, but does not create a `.scss` file and creates a `.json` file for mockup data instead. You need to restart webpack dev server in order for the new page to show up on the front page of the mockup.
 
 ---
 
 ### Rename component
-`yarn rename old-name new-name`. This will rename the component folder, all of the files, and all css class names.
+`yarn rename old-name new-name`. This will rename:
+
+* the `old-name` folder
+* `old-name.jsx`
+* `old-name.scss`
+* The component name in `old-name.jsx` and `index.js`
+* all css class names in `old-name.jsx` and `old-name.scss`
+
+If you have sub-components in the same folder, these need to be renamed manually.
 
 ---
 
 ### Convert component to stateless
-`yarn to-stateless component-name` Will convert `source/components/component-name` to a stateless component if it can. These things need to happen before you can convert:
+`yarn to-stateless component-name`
+
+This will convert `source/components/component-name` to a stateless component if it can. These things need to happen before you can convert:
 
 * Remove all lifecycle methods
 * Remove all references to `this.state`
@@ -208,7 +228,9 @@ You can usually tell if a component can be converted to stateless by the eslint 
 ---
 
 ### Convert component to stateful
-`yarn to-stateful component-name` Will convert `source/components/component-name` to a stateful component.
+`yarn to-stateful component-name`
+
+This will convert `source/components/component-name` to a stateful component.
 
 ## VS Code tasks
 If you're using VS Code, you can run the above scripts from within the editor. Running tasks this way is nice because `rename`, `to-stateful` and `to-stateless` will not require any typing if you already have the file you want to convert/rename open in your editor.
