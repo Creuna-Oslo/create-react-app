@@ -24,12 +24,12 @@ create-creuna-react-app projects/my-project
 
 ## Options
 
-### ✏️ Project name
+### 🚀 Project name
 This will be used in `package.json` as well as for `<title>` in the mockup and `<h1>` on the mockup frontpage.
 
 ---
 
-### ✏️ Your full name
+### 😸 Your full name
 Used in the `author` field in `package.json`
 
 ---
@@ -103,22 +103,10 @@ If you format your API response in the following way (or make another human do s
 ---
 
 ### 🖼️ Include responsive images helper?
-If you select this, `source/js/responsive-images.js` and `source/components/image` will be included. `source/components/fluid-image` will also work with this. These are intended to be used with the image resizer plugin to EPiServer. `responsive-images.js` measures images and returns a URL to a resized image using query parameters. The `Image` and `FluidImage` components do the same thing on mount.
+If you select this, `source/js/responsive-images.js`, `source/components/image` and `source/components/fluid-image` will be included. These are intended to be used with the [ImageResizer for .NET](https://imageresizing.net/) plugin. The `Image` and `FluidImage` components use `responsive-images.js` to measure the rendered images and get the URL for an image of appropriate size.
 
 ---
 
-### ☢️ Use inline SVG icons in React?
-If you select this, `source/components/icon` and `source/assets/icons/icons.js` will be included, as well as some npm packages. The `Icon` component will render an svg inline. You use it by putting SVG files in `source/assets/icons` and using the filename as `name` to the `Icon` component:
-
-```jsx
-<Icon name="my-icon" /> // Renders source/assets/icons/my-icon.svg inline
-```
-
-By default, the `Icon` component will render using the inherited text color as fill color. This makes setting the color of the rendered icon easy because you can just set `color` on the svg or one of its parent elements.
-
-**NOTE**: By default, this component does not work well with SVGs using stroke instead of fill. If you want to use stroked icons, you'll need to do edit `icon.scss` and maybe tweak the options for the `svgo-loader` in `webpack.config`
-
----
 
 ## Project structure
 #### React components
