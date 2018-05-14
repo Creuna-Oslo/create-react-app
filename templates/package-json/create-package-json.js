@@ -7,7 +7,6 @@ module.exports = function({
   authorEmail,
   authorName,
   projectName,
-  useInlineSvg,
   useMessenger
 }) {
   const content = fs.readFileSync(path.join(__dirname, 'package.json'), {
@@ -20,15 +19,6 @@ module.exports = function({
     .split(/(?:\r\n|\r|\n)/g)
     .reduce((accum, line) => {
       if (!useMessenger && line.includes('"pubsub-js":')) {
-        return accum;
-      }
-
-      if (
-        !useInlineSvg &&
-        (line.includes('"svg-react-loader":') ||
-          line.includes('"svgo":') ||
-          line.includes('"svgo-loader":'))
-      ) {
         return accum;
       }
 

@@ -120,7 +120,15 @@ module.exports = (env = {}) => {
             { loader: 'sass-loader', options: { sourceMap: true } }
           ])
         },
-        $assetRules
+        {
+          test: /\.(svg|png|jpg|woff2?|ttf|eot)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]'
+            }
+          }
+        }
       ]
     },
     resolve: {

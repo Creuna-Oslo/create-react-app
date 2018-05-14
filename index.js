@@ -8,12 +8,10 @@ const path = require('path');
 
 const prompt = require('./utils/prompt');
 
-const createApiHelper = require('./source/api-helper/create-api-helper');
-const createAppComponent = require('./source/app-component/create-app-component');
-const createFluidImage = require('./source/fluid-image/create-fluid-image');
-const createHomeComponent = require('./source/home-component/create-home-component');
-const createPackage = require('./source/package/create-package');
-const createWebpackConfig = require('./source/webpack/create-webpack-config');
+const createApiHelper = require('./templates/api-helper/create-api-helper');
+const createAppComponent = require('./templates/app-component/create-app-component');
+const createHomeComponent = require('./templates/home-component/create-home-component');
+const createPackage = require('./templates/package-json/create-package-json');
 
 const providedDir = process.argv[2];
 const isAbsolutePath =
@@ -29,7 +27,7 @@ if (isAbsolutePath) {
 }
 
 const buildDir = path.join(process.cwd(), providedDir || '.');
-const sourceDir = path.join(__dirname, 'source');
+const templateDir = path.join(__dirname, 'templates');
 
 // Check for preexisting files or folders
 if (providedDir && fs.existsSync(buildDir)) {
@@ -59,10 +57,10 @@ if (providedDir && fs.existsSync(buildDir)) {
 prompt(
   {
     projectName: {
-      text: '✏️  Project name (kebab-case)'
+      text: '🚀  Project name (kebab-case)'
     },
     authorName: {
-      text: '✏️  Your full name'
+      text: '😸  Your full name'
     },
     authorEmail: {
       text: '💌  Your email address'
@@ -82,10 +80,6 @@ prompt(
     useResponsiveImages: {
       text: '🖼️  Include responsive images helper?',
       type: Boolean
-    },
-    useInlineSvg: {
-      text: '☢️  Use inline SVG icons in React?',
-      type: Boolean
     }
   },
   ({
@@ -94,7 +88,6 @@ prompt(
     projectName,
     useApiHelper,
     useAnalyticsHelper,
-    useInlineSvg,
     useMessenger,
     useResponsiveImages
   }) => {
@@ -106,19 +99,13 @@ prompt(
         const isAnalyticsFile = src.includes('js/analytics.js');
         const isMessengerFile =
           src.includes('js/messenger.js') || src.includes('components/message');
-        const isIconFile =
-          src.includes('components/icon') ||
-          src.includes('assets/icons/icons.js');
         const isImageFile =
           src.includes('components/image') ||
+          src.includes('components/fluid-image') ||
           src.includes('js/responsive-images.js');
 
         if (isAnalyticsFile) {
           return useAnalyticsHelper;
-        }
-
-        if (isIconFile) {
-          return useInlineSvg;
         }
 
         if (isMessengerFile) {
@@ -133,12 +120,6 @@ prompt(
       }
     });
 
-    // webpack.config.js
-    fs.writeFileSync(
-      path.join(buildDir, 'webpack.config.js'),
-      createWebpackConfig(useInlineSvg)
-    );
-
     // package.json
     fs.writeFileSync(
       path.join(buildDir, 'package.json'),
@@ -147,15 +128,14 @@ prompt(
         authorName,
         projectName,
         useAnalyticsHelper,
-        useInlineSvg,
         useMessenger
       })
     );
 
     // eslintrc
-    // This was moved to 'source' because it messed up autoformatting when editing files in 'static-files'
+    // This was moved to 'templates' because it messed up autoformatting when editing files in 'static-files'
     fs.copyFileSync(
-      path.join(sourceDir, 'eslintrc/.eslintrc.json'),
+      path.join(templateDir, 'eslintrc/.eslintrc.json'),
       path.join(buildDir, '.eslintrc.json')
     );
 
@@ -183,25 +163,6 @@ prompt(
     fs.copyFileSync(
       path.join(__dirname, 'utils/prompt.js'),
       path.join(buildDir, 'scripts/prompt.js')
-    );
-
-    // fluid-image
-    const fluidImageBuildDir = path.join(
-      buildDir,
-      'source/components/fluid-image'
-    );
-    fs.mkdirSync(fluidImageBuildDir);
-    fs.writeFileSync(
-      path.join(fluidImageBuildDir, 'fluid-image.jsx'),
-      createFluidImage(useResponsiveImages)
-    );
-    fs.copyFileSync(
-      path.join(sourceDir, 'fluid-image/fluid-image.scss'),
-      path.join(fluidImageBuildDir, 'fluid-image.scss')
-    );
-    fs.copyFileSync(
-      path.join(sourceDir, 'fluid-image/index.js'),
-      path.join(fluidImageBuildDir, 'index.js')
     );
 
     console.log(`\n🦄  ${chalk.greenBright('All done!')}\n`);

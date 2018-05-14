@@ -8,36 +8,25 @@ function onTopic(topic, func) {
     return;
   }
 
-  return PubSub.subscribe(topic, (topic, { message, title }) => {
-    func({ message, title });
+  return PubSub.subscribe(topic, (topic, { message }) => {
+    func({ message });
   });
 }
 
-function send(topic, { message, title }) {
-  PubSub.publish(topic, { message, title });
+function send(topic, { message }) {
+  PubSub.publish(topic, { message });
 }
 
 const onErrorMessage = func => onTopic(errorMessageTopic, func);
 
-function off(token) {
-  if (!token) {
-    return;
-  }
-
-  PubSub.unsubscribe(token);
-}
-
 const onMessage = func => onTopic(messageTopic, func);
 
-const sendErrorMessage = ({ message, title }) =>
-  send(errorMessageTopic, { message, title });
+const sendErrorMessage = ({ message }) => send(errorMessageTopic, { message });
 
-const sendMessage = ({ message, title }) =>
-  send(messageTopic, { message, title });
+const sendMessage = ({ message }) => send(messageTopic, { message });
 
 export default {
   onErrorMessage,
-  off,
   onMessage,
   sendErrorMessage,
   sendMessage

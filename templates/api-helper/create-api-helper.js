@@ -11,10 +11,10 @@ function readFile(filePath) {
 }
 
 module.exports = function({ useAnalyticsHelper, useMessenger }) {
-  const baseFile = readFile('api-helper.js');
-  const analyticsHandler = readFile('handle-analytics.js');
-  const messengerFetchError = readFile('messenger-fetch-error.js');
-  const messageHandler = readFile('handle-message.js');
+  const baseFile = readFile('api-helper.template.js');
+  const analyticsHandler = readFile('handle-analytics.partial.js');
+  const messengerFetchError = readFile('messenger-fetch-error.partial.js');
+  const messageHandler = readFile('handle-message.partial.js');
 
   const newFileContent = prettier.format(
     baseFile
