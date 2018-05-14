@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ImageLoader from '../../js/responsive-images';
+import ImageLoader from 'js/responsive-images';
 
 class Image extends React.Component {
   static propTypes = {

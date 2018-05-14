@@ -45,7 +45,7 @@ function request(url, options) {
     .then(parseResponse) //$callMessageHandler //$callAnalyticsHandler
     .then(handleNotOk)
     .then(handleResponse)
-    .then(handleFetchError);
+    .catch(handleFetchError);
 }
 
 function post(endpoint, data) {
@@ -63,7 +63,7 @@ function get(endpoint) {
 }
 
 function execute(endpoint, data) {
-  if (endpoint.indexOf('/mockup-api') !== -1) {
+  if (endpoint.indexOf('/mockup/api') !== -1) {
     console.log('Requesting mock data from', endpoint, data); // eslint-disable-line no-console
     return new Promise(resolve => {
       setTimeout(() => {

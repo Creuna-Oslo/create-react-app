@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import cn from 'classnames';
 
-import ImageLoader from '../../js/responsive-images';
+import ImageLoader from 'js/responsive-images';
 
 class FluidImage extends React.Component {
   static propTypes = {

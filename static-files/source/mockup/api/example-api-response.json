@@ -1,5 +1,10 @@
 {
-  "response": {
+  "analytics": {
+    "event": "test"
+  },
+  "messageToUser": "The API request went well!",
+  "success": true,
+  "payload": {
     "text":
       "Put your mock api responses in 'mockup/api'. You can then use them with the api helper. For instance: api.excecute('mockup/api/example-api-response.json').then(response => {})"
   }

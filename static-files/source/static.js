@@ -6,7 +6,7 @@ import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import App from './mockup/app';
 import Routes from './mockup/routes';
 
-import inputDetection from './js/input-detection';
+import inputDetection from 'js/input-detection';
 
 if (typeof document !== 'undefined') {
   ReactDOM.render(

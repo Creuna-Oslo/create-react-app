@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import cn from 'classnames';
 
-import messenger from 'messenger';
+import messenger from 'js/messenger';
 
 class Message extends React.Component {
   static propTypes = {
@@ -58,10 +58,7 @@ class Message extends React.Component {
         >
           <p>{this.state.text}</p>
           {this.state.isErrorMessage && (
-            <button
-              className="message-close"
-              onClick={this.hide}
-            />
+            <button className="message-close" onClick={this.hide} />
           )}
         </div>
       )

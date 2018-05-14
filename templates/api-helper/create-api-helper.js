@@ -30,7 +30,7 @@ module.exports = function({ useAnalyticsHelper, useMessenger }) {
       .replace(
         '//$messengerImport',
         useMessenger
-          ? `import getData from '@creuna/utils';
+          ? `import getData from '@creuna/utils/get-data';
         import messenger from './messenger';`
           : ''
       )

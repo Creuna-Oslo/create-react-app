@@ -1,10 +1,10 @@
 /*eslint no-unused-vars: 0*/
-import get from "lodash/get";
-import merge from "lodash/merge";
+import get from 'lodash/get';
+import merge from 'lodash/merge';
 
-import isRunningOnClient from "@creuna/utils/is-running-on-client";
-import stripUndefined from "@creuna/utils/strip-undefined";
-import tryParseJson from "@creuna/utils/try-parse-json";
+import isRunningOnClient from '@creuna/utils/is-running-on-client';
+import stripUndefined from '@creuna/utils/strip-undefined';
+import tryParseJson from '@creuna/utils/try-parse-json';
 
 /* NOTE: Implement Google Tag Manager for this module to work correctly
 
@@ -33,7 +33,7 @@ function Timeout(fn, delay) {
 }
 
 function getCallbackEnhancedData(data, callback) {
-  if (typeof callback !== "function") {
+  if (typeof callback !== 'function') {
     return data;
   }
 
@@ -68,5 +68,5 @@ function send(data, callback) {
 }
 
 export default {
-  onProductClick
+  send
 };
