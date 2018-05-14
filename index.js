@@ -11,7 +11,8 @@ const prompt = require('./utils/prompt');
 const createApiHelper = require('./templates/api-helper/create-api-helper');
 const createAppComponent = require('./templates/app-component/create-app-component');
 const createHomeComponent = require('./templates/home-component/create-home-component');
-const createPackage = require('./templates/package-json/create-package-json');
+const createPackageJson = require('./templates/package-json/create-package-json');
+const filterFiles = require('./utils/filter-files');
 
 const providedDir = process.argv[2];
 const isAbsolutePath =
@@ -95,35 +96,17 @@ prompt(
     ensureDirSync(buildDir);
 
     copySync(path.join(__dirname, 'static-files'), buildDir, {
-      filter: src => {
-        const isAnalyticsFile = src.includes('js/analytics.js');
-        const isMessengerFile =
-          src.includes('js/messenger.js') || src.includes('components/message');
-        const isImageFile =
-          src.includes('components/image') ||
-          src.includes('components/fluid-image') ||
-          src.includes('js/responsive-images.js');
-
-        if (isAnalyticsFile) {
-          return useAnalyticsHelper;
-        }
-
-        if (isMessengerFile) {
-          return useMessenger;
-        }
-
-        if (isImageFile) {
-          return useResponsiveImages;
-        }
-
-        return true;
-      }
+      filter: filterFiles.bind(null, {
+        useAnalyticsHelper,
+        useMessenger,
+        useResponsiveImages
+      })
     });
 
     // package.json
     fs.writeFileSync(
       path.join(buildDir, 'package.json'),
-      createPackage({
+      createPackageJson({
         authorEmail,
         authorName,
         projectName,

@@ -71,6 +71,6 @@ const formatQuestion = ({ type, text }) => {
     case Boolean:
       return `${text} ${chalk.white('(Y/N)')}: `;
     default:
-      return `${text}: `;
+      return `${text}:`;
   }
 };
