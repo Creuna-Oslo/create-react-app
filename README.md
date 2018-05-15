@@ -6,11 +6,15 @@ React app boilerplate
 
 ## Usage
 #### Install
+
 ```
 npm install -g @creuna/create-react-app
 ```
 
 #### Create new app
+
+**Requires node >= 7.5.x**
+
 ```
 create-creuna-react-app
 ```
