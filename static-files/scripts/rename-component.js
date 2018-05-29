@@ -89,16 +89,6 @@ function renameComponent(componentName, newComponentName) {
     `$1${newComponentName}$2`
   );
 
-  // Replace selectors
-  const scssFileContent = fs.readFileSync(path.join(folderPath, scssFilename), {
-    encoding: 'utf-8'
-  });
-  const scssRegex = new RegExp(`\\.${componentName}( |-)`, 'g');
-  const newScssFileContent = scssFileContent.replace(
-    scssRegex,
-    `.${newComponentName}$1`
-  );
-
   fs.writeFile(
     path.join(folderPath, jsxFilename),
     prettier.format(newJsxFileContent, eslintrc.rules['prettier/prettier'][1]),
@@ -112,22 +102,8 @@ function renameComponent(componentName, newComponentName) {
 
         process.exit(1);
       }
-    }
-  );
 
-  fs.writeFile(
-    path.join(folderPath, scssFilename),
-    newScssFileContent,
-    {},
-    err => {
-      if (err) {
-        console.log(
-          `👻  ${chalk.red('Error writing')} ${chalk.blueBright(scssFilename)}`,
-          err
-        );
-
-        process.exit(1);
-      }
+      console.log(`${chalk.blueBright(jsxFilename)} written`);
     }
   );
 
@@ -156,6 +132,7 @@ function renameComponent(componentName, newComponentName) {
     }
   );
 
+  // Overwrite index.js file with new component name
   const newJsxFilename = `${newComponentName}.jsx`;
   fs.rename(
     path.join(folderPath, jsxFilename),
@@ -176,26 +153,61 @@ function renameComponent(componentName, newComponentName) {
     }
   );
 
-  const newScssFilename = `${newComponentName}.scss`;
-  fs.rename(
-    path.join(folderPath, scssFilename),
-    path.join(folderPath, newScssFilename),
-    err => {
-      if (err) {
-        console.log(
-          `👻  ${chalk.red('Error renaming')} ${chalk.blueBright(
-            newScssFilename
-          )}`,
-          err
-        );
-
-        process.exit(1);
+  // Rename scss file and class names if it exists
+  if (fs.existsSync(path.join(folderPath, scssFilename))) {
+    // Replace selectors
+    const scssFileContent = fs.readFileSync(
+      path.join(folderPath, scssFilename),
+      {
+        encoding: 'utf-8'
       }
+    );
+    const scssRegex = new RegExp(`\\.${componentName}( |-)`, 'g');
+    const newScssFileContent = scssFileContent.replace(
+      scssRegex,
+      `.${newComponentName}$1`
+    );
 
-      console.log(`💾  ${chalk.blueBright(newScssFilename)} saved`);
-    }
-  );
+    fs.writeFile(
+      path.join(folderPath, scssFilename),
+      newScssFileContent,
+      {},
+      err => {
+        if (err) {
+          console.log(
+            `👻  ${chalk.red('Error writing')} ${chalk.blueBright(
+              scssFilename
+            )}`,
+            err
+          );
 
+          process.exit(1);
+        }
+      }
+    );
+
+    const newScssFilename = `${newComponentName}.scss`;
+    fs.rename(
+      path.join(folderPath, scssFilename),
+      path.join(folderPath, newScssFilename),
+      err => {
+        if (err) {
+          console.log(
+            `👻  ${chalk.red('Error renaming')} ${chalk.blueBright(
+              newScssFilename
+            )}`,
+            err
+          );
+
+          process.exit(1);
+        }
+
+        console.log(`💾  ${chalk.blueBright(newScssFilename)} saved`);
+      }
+    );
+  }
+
+  // Rename component folder
   fs.rename(folderPath, newFolderPath, err => {
     if (err) {
       console.log(`👻  ${chalk.red('Error renaming folder')}`, err);
