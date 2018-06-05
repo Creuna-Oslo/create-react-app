@@ -19,9 +19,9 @@ const mockupPaths = readdirSync(mockupFolder)
   .map(name => '/' + name)
   .concat('/');
 
-module.exports = (env = {}) => {
+module.exports = (env = {}, options = {}) => {
   const shouldBuildStaticSite = env.static === true;
-  const shouldMinify = env.minify === true;
+  const shouldMinify = options.mode === 'production';
   const shouldUseAnalyzer = env.analyzer === true;
 
   if (shouldBuildStaticSite) {
@@ -83,6 +83,7 @@ module.exports = (env = {}) => {
 
       if (shouldBuildStaticSite) {
         output.libraryTarget = 'umd';
+        output.globalObject = 'this';
       }
 
       return output;
@@ -167,12 +168,16 @@ module.exports = (env = {}) => {
                 { copyUnmodified: true }
               )
             ]
-          : [
-              new webpack.optimize.ModuleConcatenationPlugin(),
-              new webpack.optimize.CommonsChunkPlugin({
-                chunks: ['client'],
-                name: 'vendor',
-                minChunks: module => {
+          : [new webpack.optimize.ModuleConcatenationPlugin()]
+      )
+      .concat(shouldUseAnalyzer ? [new BundleAnalyzerPlugin()] : []),
+    optimization: shouldBuildStaticSite
+      ? undefined
+      : {
+          splitChunks: {
+            cacheGroups: {
+              commons: {
+                test: module => {
                   if (
                     module.resource &&
                     /^.*\.(css|scss)$/.test(module.resource)
@@ -183,26 +188,12 @@ module.exports = (env = {}) => {
                   return (
                     module.context && module.context.includes('node_modules')
                   );
-                }
-              })
-            ]
-      )
-      .concat(shouldUseAnalyzer ? [new BundleAnalyzerPlugin()] : [])
-      .concat(
-        shouldMinify
-          ? [
-              new webpack.DefinePlugin({
-                'process.env': {
-                  NODE_ENV: JSON.stringify('production')
-                }
-              }),
-              new webpack.optimize.UglifyJsPlugin({
-                compress: { warnings: false },
-                output: { comments: false },
-                sourceMap: true
-              })
-            ]
-          : []
-      )
+                },
+                chunks: chunk => chunk.name === 'client',
+                name: 'vendor'
+              }
+            }
+          }
+        }
   };
 };
