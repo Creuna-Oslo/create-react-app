@@ -175,6 +175,17 @@ By default, all focus outlines are disabled when the `.mouse-user` class is pres
 You can use these classnames to provide alternative styling based on input method (like disabling hover effects for touch screens).
 
 
+## Testing
+[Chimp](https://chimp.readme.io/docs/introduction) is included for easy end to end testing. The provided config `./chimpconfig.js` uses Mocha and headless (invisible) Chrome to perform tests on the ui. There is an example test provided in `/tests/example-page.js`
+
+### Things to note
+* With the provided config, Chimp uses Mocha and WebdriverIO.
+    * Mocha provides the `describe` and `it` globals. [docs here](https://mochajs.org/)
+    * WebdriverIO provides the `browser` global. [docs here](http://webdriver.io/api.html)
+* Put tests in `./tests` (or provide an alternative path in `chimpconfig.js`
+* Test files can be named anything, and subfolders are supported.
+
+
 ## Scripts
 Included is a couple of utility scripts for lazy people. You can use these from the terminal or from within VS Code if you use that.
 

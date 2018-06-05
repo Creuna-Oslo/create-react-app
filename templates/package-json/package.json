@@ -14,6 +14,7 @@
     "lint:fix": "eslint --ext js,jsx ./source --fix",
     "mockup": "node scripts/create-mockup-page",
     "rename": "node scripts/rename-component",
+    "test": "chimp ./chimpconfig.js",
     "to-stateful": "node scripts/convert-to-stateful-component",
     "to-stateless": "node scripts/convert-to-stateless-component"
   },
@@ -33,7 +34,9 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.23.0",
     "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
     "chalk": "^2.1.0",
+    "chimp": "^0.51.1",
     "classnames": "^2.2.5",
     "copy-webpack-plugin": "^4.3.1",
     "css-loader": "^0.28.8",
