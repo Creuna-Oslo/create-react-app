@@ -43,7 +43,7 @@ module.exports = function({ useAnalyticsHelper, useMessenger }) {
         '//$messengerFetchError',
         useMessenger ? messengerFetchError : ''
       ),
-    eslintrc.rules['prettier/prettier'][1]
+    Object.assign({ parser: 'babylon' }, eslintrc.rules['prettier/prettier'][1])
   );
 
   return newFileContent;

@@ -7,7 +7,6 @@ const prettier = require('prettier');
 
 const utils = require('./utils');
 const prompt = require('./prompt');
-const eslintrc = require('../.eslintrc.json');
 
 prompt(
   {
@@ -91,7 +90,7 @@ function renameComponent(componentName, newComponentName) {
 
   fs.writeFile(
     path.join(folderPath, jsxFilename),
-    prettier.format(newJsxFileContent, eslintrc.rules['prettier/prettier'][1]),
+    prettier.format(newJsxFileContent, utils.prettierConfig),
     {},
     err => {
       if (err) {
@@ -113,7 +112,7 @@ function renameComponent(componentName, newComponentName) {
       `import ${pascalNewComponentName} from './${newComponentName}';
     
     export default ${pascalNewComponentName};`,
-      eslintrc.rules['prettier/prettier'][1]
+      utils.prettierConfig
     ),
     {},
     err => {

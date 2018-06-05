@@ -20,7 +20,6 @@
     "prettier/prettier": [
       "warn",
       {
-        "parser": "babylon",
         "singleQuote": true
       }
     ],
