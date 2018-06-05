@@ -11,11 +11,11 @@ const prompt = require('./prompt');
 prompt(
   {
     componentName: {
-      text: 'Name of component: ',
+      text: 'Name of component',
       value: process.argv[2]
     },
     newComponentName: {
-      text: 'Name of new component: ',
+      text: 'New name of component',
       value: process.argv[3]
     }
   },
@@ -88,68 +88,33 @@ function renameComponent(componentName, newComponentName) {
     `$1${newComponentName}$2`
   );
 
-  fs.writeFile(
+  fs.writeFileSync(
     path.join(folderPath, jsxFilename),
-    prettier.format(newJsxFileContent, utils.prettierConfig),
-    {},
-    err => {
-      if (err) {
-        console.log(
-          `👻  ${chalk.red('Error writing')} ${chalk.blueBright(jsxFilename)}`,
-          err
-        );
-
-        process.exit(1);
-      }
-
-      console.log(`${chalk.blueBright(jsxFilename)} written`);
-    }
+    prettier.format(newJsxFileContent, utils.prettierConfig)
   );
+  console.log(`💾  ${chalk.blueBright(jsxFilename)} written`);
 
-  fs.writeFile(
+  fs.writeFileSync(
     path.join(folderPath, indexFilename),
     prettier.format(
       `import ${pascalNewComponentName} from './${newComponentName}';
     
     export default ${pascalNewComponentName};`,
       utils.prettierConfig
-    ),
-    {},
-    err => {
-      if (err) {
-        console.log(
-          `👻  ${chalk.red('Error writing')} ${chalk.blueBright(
-            indexFilename
-          )}`,
-          err
-        );
-
-        process.exit(1);
-      }
-
-      console.log(`💾  ${chalk.blueBright(indexFilename)} saved`);
-    }
+    )
   );
+  console.log(`💾  ${chalk.blueBright(indexFilename)} written`);
 
   // Overwrite index.js file with new component name
   const newJsxFilename = `${newComponentName}.jsx`;
-  fs.rename(
+  fs.renameSync(
     path.join(folderPath, jsxFilename),
-    path.join(folderPath, newJsxFilename),
-    err => {
-      if (err) {
-        console.log(
-          `👻  ${chalk.red('Error renaming')} ${chalk.blueBright(
-            newJsxFilename
-          )}`,
-          err
-        );
-
-        process.exit(1);
-      }
-
-      console.log(`💾  ${chalk.blueBright(newJsxFilename)} saved`);
-    }
+    path.join(folderPath, newJsxFilename)
+  );
+  console.log(
+    `💾  ${chalk.blueBright(jsxFilename)} renamed to ${chalk.blueBright(
+      newJsxFilename
+    )}`
   );
 
   // Rename scss file and class names if it exists
@@ -167,42 +132,18 @@ function renameComponent(componentName, newComponentName) {
       `.${newComponentName}$1`
     );
 
-    fs.writeFile(
-      path.join(folderPath, scssFilename),
-      newScssFileContent,
-      {},
-      err => {
-        if (err) {
-          console.log(
-            `👻  ${chalk.red('Error writing')} ${chalk.blueBright(
-              scssFilename
-            )}`,
-            err
-          );
-
-          process.exit(1);
-        }
-      }
-    );
+    fs.writeFileSync(path.join(folderPath, scssFilename), newScssFileContent);
+    console.log(`💾  ${chalk.blueBright(scssFilename)} written`);
 
     const newScssFilename = `${newComponentName}.scss`;
-    fs.rename(
+    fs.renameSync(
       path.join(folderPath, scssFilename),
-      path.join(folderPath, newScssFilename),
-      err => {
-        if (err) {
-          console.log(
-            `👻  ${chalk.red('Error renaming')} ${chalk.blueBright(
-              newScssFilename
-            )}`,
-            err
-          );
-
-          process.exit(1);
-        }
-
-        console.log(`💾  ${chalk.blueBright(newScssFilename)} saved`);
-      }
+      path.join(folderPath, newScssFilename)
+    );
+    console.log(
+      `💾  ${chalk.blueBright(scssFilename)} renamed to ${chalk.blueBright(
+        newScssFilename
+      )}`
     );
   }
 
@@ -214,6 +155,10 @@ function renameComponent(componentName, newComponentName) {
       process.exit(1);
     }
 
-    console.log(`💾 folder renamed`);
+    console.log(
+      `💾  folder ${chalk.blueBright(
+        componentName
+      )} renamed to ${chalk.blueBright(chalk.blueBright(newComponentName))}`
+    );
   });
 }
