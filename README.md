@@ -44,7 +44,7 @@ Used in the `author` field in `package.json`
 ---
 
 ### ☁️ Include API-helper?
-If you select this, `source/js/api-helper.js` will be included. This is a handy abstraction of `fetch` that supports automating analytics (optional), showing status messages (optional) and working with mock API responses.
+If you select this, `source/js/api-helper.js` will be included. This is a handy abstraction of `fetch` that supports automating analytics (optional), showing status messages (optional) and using json files to mock API requests.
 
 #### Usage:
 ```js
@@ -87,7 +87,7 @@ const analyticsData = {}; // some google analytics data
 analytics.send(analyticsData);
 ```
 
-This will push `analyticsData` to `window.dataLayer`. `send` supports both objects and arrays. When a `payload` object is present in the response, only the content of `payload` will be returned from `api.execute`.
+This will push `analyticsData` to `window.dataLayer`. `send` supports both objects and arrays.
 
 #### With API-helper
 
@@ -104,10 +104,18 @@ If you format your API response in the following way (or make another human do s
 }
 ```
 
+When a `payload` object is present in the response, only the content of `payload` will be returned from `api.execute`.
+
 ---
 
 ### 🖼️ Include responsive images helper?
-If you select this, `source/js/responsive-images.js`, `source/components/image` and `source/components/fluid-image` will be included. These are intended to be used with the [ImageResizer for .NET](https://imageresizing.net/) plugin. The `Image` and `FluidImage` components use `responsive-images.js` to measure the rendered images and get the URL for an image of appropriate size.
+If you select this the following files will be included: 
+
+* `source/js/responsive-images.js`
+* `source/components/image`
+* `source/components/fluid-image`
+
+These are intended to be used with the [ImageResizer for .NET](https://imageresizing.net/) plugin. The `Image` and `FluidImage` components use `responsive-images.js` to measure the rendered images and get the URL for an image of appropriate size.
 
 ---
 
