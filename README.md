@@ -182,6 +182,7 @@ You can use these classnames to provide alternative styling based on input metho
 * With the provided config, Chimp uses Mocha and WebdriverIO.
     * Mocha provides the `describe` and `it` globals. [docs here](https://mochajs.org/)
     * WebdriverIO provides the `browser` global. [docs here](http://webdriver.io/api.html)
+* Use Chai for test assertions. [docs here](http://www.chaijs.com/api/)
 * Put tests in `./tests` (or provide an alternative path in `chimpconfig.js`
 * Test files can be named anything, and subfolders are supported.
 
