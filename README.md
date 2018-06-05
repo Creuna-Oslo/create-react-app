@@ -179,6 +179,8 @@ You can use these classnames to provide alternative styling based on input metho
 [Chimp](https://chimp.readme.io/docs/introduction) is included for easy end to end testing. The provided config `./chimpconfig.js` uses Mocha and headless (invisible) Chrome to perform tests on the ui. There is an example test provided in `/tests/example-page.js`
 
 ### Things to note
+* run tests with `yarn test` or `npm run test`.
+* **Webpack dev server needs to be running for tests to work.**
 * With the provided config, Chimp uses Mocha and WebdriverIO.
     * Mocha provides the `describe` and `it` globals. [docs here](https://mochajs.org/)
     * WebdriverIO provides the `browser` global. [docs here](http://webdriver.io/api.html)
