@@ -183,11 +183,11 @@ By default, all focus outlines are disabled when the `.mouse-user` class is pres
 You can use these classnames to provide alternative styling based on input method (like disabling hover effects for touch screens).
 
 
-## Testing
+## UI Testing
 [Chimp](https://chimp.readme.io/docs/introduction) is included for easy end to end testing. The provided config `./chimpconfig.js` uses Mocha and headless (invisible) Chrome to perform tests on the ui. There is an example test provided in `/tests/example-page.js`
 
 ### Things to note
-* run tests with `yarn test` or `npm run test`.
+* run tests with `yarn test:ui` or `npm run test:ui`.
 * **Webpack dev server needs to be running for tests to work.**
 * With the provided config, Chimp uses Mocha and WebdriverIO.
     * Mocha provides the `describe` and `it` globals. [docs here](https://mochajs.org/)

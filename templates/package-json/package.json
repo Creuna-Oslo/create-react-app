@@ -14,7 +14,7 @@
     "lint:fix": "eslint --ext js,jsx ./source --fix",
     "mockup": "node scripts/create-mockup-page",
     "rename": "node scripts/rename-component",
-    "test": "chimp ./chimpconfig.js",
+    "test:ui": "chimp ./chimpconfig.js",
     "to-stateful": "node scripts/convert-to-stateful-component",
     "to-stateless": "node scripts/convert-to-stateless-component"
   },
