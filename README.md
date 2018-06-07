@@ -17,13 +17,13 @@ npm install -g @creuna/create-react-app
 **Requires node >= 7.5.x**
 
 ```
-create-creuna-react-app
+creuna-new
 ```
 
 This will install files to the **current working directory**, so make sure you `cd` to where you want to install. Alternatively, you can provide a path like this (relative to the current working directory):
 
 ```
-create-creuna-react-app projects/my-project
+creuna-new projects/my-project
 ```
 
 ## Options

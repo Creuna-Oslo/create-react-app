@@ -1,6 +1,6 @@
 {
   "name": "@creuna/create-react-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Asbjorn Hegdahl",
     "email": "asbjorn.hegdahl@creuna.no"
@@ -10,7 +10,7 @@
     "Asbjørn Hegdahl <asbjorn.hegdahl@creuna.no>"
   ],
   "bin":{
-    "create-creuna-react-app": "./index.js"
+    "creuna-new": "./index.js"
   },
   "main": "index.js",
   "files": [
