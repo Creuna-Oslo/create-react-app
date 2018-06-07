@@ -5,7 +5,6 @@ const fs = require('fs');
 const prettier = require('prettier');
 
 const utils = require('./utils');
-const eslintrc = require('../.eslintrc.json');
 
 const getComponent = require('./get-component');
 
@@ -26,10 +25,10 @@ getComponent(process.argv[2], ({ componentName, filePath }) => {
   }
 
   // Format file content because whitespace is significant in our regular expressions
-  const prettyFileContent = prettier.format(fileContent, {
-    ...eslintrc.rules['prettier/prettier'][1],
-    tabWidth: 2
-  });
+  const prettyFileContent = prettier.format(
+    fileContent,
+    Object.assign(utils.prettierConfig, { tabWidth: 2 })
+  );
 
   // Get render body
   const componentRegex = new RegExp(
@@ -105,7 +104,7 @@ ${defaultProps}
 
   const newFilePrettyContent = prettier.format(
     newFileContent,
-    eslintrc.rules['prettier/prettier'][1]
+    utils.prettierConfig
   );
 
   fs.writeFile(filePath, newFilePrettyContent, {}, err => {

@@ -148,7 +148,7 @@ prompt(
       path.join(buildDir, 'scripts/prompt.js')
     );
 
-    console.log(`\n🦄  ${chalk.greenBright('All done!')}\n`);
+    console.log(`\n🦄  ${chalk.greenBright('All done!')} 🌈 \n`);
     console.log('Next steps:');
 
     if (providedDir) {

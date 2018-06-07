@@ -5,6 +5,7 @@ React app boilerplate
 [![npm version](https://img.shields.io/npm/v/@creuna/create-react-app.svg?style=flat)](https://www.npmjs.com/package/@creuna/create-react-app)
 
 ## Usage
+
 #### Install
 
 ```
@@ -25,28 +26,32 @@ This will install files to the **current working directory**, so make sure you `
 create-creuna-react-app projects/my-project
 ```
 
-
 ## Options
 
 ### 🚀 Project name
+
 This will be used in `package.json` as well as for `<title>` in the mockup and `<h1>` on the mockup frontpage.
 
 ---
 
 ### 😸 Your full name
+
 Used in the `author` field in `package.json`
 
 ---
 
 ### 💌 Your email address
+
 Used in the `author` field in `package.json`
 
 ---
 
 ### ☁️ Include API-helper?
+
 If you select this, `source/js/api-helper.js` will be included. This is a handy abstraction of `fetch` that supports automating analytics (optional), showing status messages (optional) and working with mock API responses.
 
 #### Usage:
+
 ```js
 api.execute(url, data).then(response => {
   // do something with response
@@ -56,9 +61,11 @@ api.execute(url, data).then(response => {
 ---
 
 ### 💬 Include message helper for API?
+
 If you select this, `source/js/messenger.js` and `source/components/message` will be included. Also, the messenger helper is automagically wired up with the API-helper.
 
 #### Usage:
+
 For the messenger helper to work, API responses have to be formatted as follows:
 
 ```
@@ -78,16 +85,18 @@ When a `payload` object is present in the response, only the content of `payload
 ---
 
 ### 📈 Include Analytics helper?
-If you select this, `source/js/analytics.js` will be included and wired up to work with the API-helper. 
+
+If you select this, `source/js/analytics.js` will be included and wired up to work with the API-helper.
 
 #### Usage:
+
 ```js
 const analyticsData = {}; // some google analytics data
 
 analytics.send(analyticsData);
 ```
 
-This will push `analyticsData` to `window.dataLayer`. `send` supports both objects and arrays. When a `payload` object is present in the response, only the content of `payload` will be returned from `api.execute`.
+This will push `analyticsData` to `window.dataLayer`. `send` supports both objects and arrays.
 
 #### With API-helper
 
@@ -104,21 +113,32 @@ If you format your API response in the following way (or make another human do s
 }
 ```
 
+When a `payload` object is present in the response, only the content of `payload` will be returned from `api.execute`.
+
 ---
 
 ### 🖼️ Include responsive images helper?
-If you select this, `source/js/responsive-images.js`, `source/components/image` and `source/components/fluid-image` will be included. These are intended to be used with the [ImageResizer for .NET](https://imageresizing.net/) plugin. The `Image` and `FluidImage` components use `responsive-images.js` to measure the rendered images and get the URL for an image of appropriate size.
+
+If you select this the following files will be included:
+
+* `source/js/responsive-images.js`
+* `source/components/image`
+* `source/components/fluid-image`
+
+These are intended to be used with the [ImageResizer for .NET](https://imageresizing.net/) plugin. The `Image` and `FluidImage` components use `responsive-images.js` to measure the rendered images and get the URL for an image of appropriate size.
 
 ---
 
-
 ## Project structure
+
 #### React components
+
 Put React components in `source/components`. It is recommended to have each component in a separate folder, containing a `jsx` file, a `scss` file and an `index.js` file.
 
 If the folder and the `jsx` file have the same name, the component will be included in the generated `app.components.js` file which can be used to render components on a backend (like React.NET).
 
 #### Assets
+
 Put your assets like fonts, icons and logos in `source/assets`. Mockup content assets can be put in `source/mockup/assets`. Webpack copies everything from `source/mockup/assets` to `/mockup/assets`, so you can refer to your mockup files like this:
 
 ```json
@@ -128,16 +148,17 @@ Put your assets like fonts, icons and logos in `source/assets`. Mockup content a
 ```
 
 #### Mockup
+
 Before Webpack dev server runs, the frontpage of the mockup will be generated. All mockup pages that have a folder and a component of the same name as well as an `index.js` file will get a link on the frontpage. You can customize the name and group name in the `jsx` file by adding a comment to the first line like this:
 
 ```js
 // Group name/Page name
-
 ```
 
 Pages with the same group name will be grouped on the frontpage.
 
 #### Mocking API responses
+
 Webpack will copy everything from `source/mockup/api` to `/mockup/api` you can reference your mock API responses like this:
 
 ```json
@@ -146,8 +167,8 @@ Webpack will copy everything from `source/mockup/api` to `/mockup/api` you can r
 }
 ```
 
-
 ## Aliases
+
 By default, two aliases are included in `webpack.config`:
 
 * `components` which resolves to `source/components`
@@ -162,8 +183,8 @@ import someScript from 'js/some-script';
 
 These aliases are also included in `jsconfig.json` which makes VS Code resolve the aliases, giving you autocomplete.
 
-
 ## Input detection
+
 `js/input-detection.js` is included in both the `client` and `static` bundles. It checks for mouse, touch and keyboard events and puts classnames on `<html>`:
 
 * `.mouse-user`: The last event was either a mouse or touch event (this is removed when a keyboard event occurs)
@@ -174,8 +195,23 @@ By default, all focus outlines are disabled when the `.mouse-user` class is pres
 
 You can use these classnames to provide alternative styling based on input method (like disabling hover effects for touch screens).
 
+## UI Testing
+
+[Chimp](https://chimp.readme.io/docs/introduction) is included for easy end to end testing. The provided config `./chimpconfig.js` uses Mocha and headless (invisible) Chrome to perform tests on the ui. There is an example test provided in `/tests/example-page.js`
+
+### Things to note
+
+* run tests with `yarn test:ui` or `npm run test:ui`.
+* **Webpack dev server needs to be running for tests to work.**
+* With the provided config, Chimp uses Mocha and WebdriverIO.
+  * Mocha provides the `describe` and `it` globals. [docs here](https://mochajs.org/)
+  * WebdriverIO provides the `browser` global. [docs here](http://webdriver.io/api.html)
+* Use Chai for test assertions. [docs here](http://www.chaijs.com/api/)
+* Put tests in `./tests` (or provide an alternative path in `chimpconfig.js`
+* Test files can be named anything, and subfolders are supported.
 
 ## Scripts
+
 Included is a couple of utility scripts for lazy people. You can use these from the terminal or from within VS Code if you use that.
 
 ### Create new component
@@ -187,6 +223,7 @@ This creates the folder `source/components/component-name` and puts `component-n
 ---
 
 ### Create new mockup page
+
 `yarn mockup page-name`
 
 Works much like the above script, but does not create a `.scss` file and creates a `.json` file for mockup data instead. You need to restart webpack dev server in order for the new page to show up on the front page of the mockup.
@@ -194,6 +231,7 @@ Works much like the above script, but does not create a `.scss` file and creates
 ---
 
 ### Rename component
+
 `yarn rename old-name new-name`. This will rename:
 
 * the `old-name` folder
@@ -207,6 +245,7 @@ If you have sub-components in the same folder, these need to be renamed manually
 ---
 
 ### Convert component to stateless
+
 `yarn to-stateless component-name`
 
 This will convert `source/components/component-name` to a stateless component if it can. These things need to happen before you can convert:
@@ -220,11 +259,13 @@ You can usually tell if a component can be converted to stateless by the eslint 
 ---
 
 ### Convert component to stateful
+
 `yarn to-stateful component-name`
 
 This will convert `source/components/component-name` to a stateful component.
 
 ## VS Code tasks
+
 If you're using VS Code, you can run the above scripts from within the editor. Running tasks this way is nice because `rename`, `to-stateful` and `to-stateless` will not require any typing if you already have the file you want to convert/rename open in your editor.
 
 Open the Command Pallette (`View -> Command Pallette`) or `⇧⌘P`, type `run task` and select `Tasks: Run Task`. Then, start typing the name of the script you want to run, like `rename` or `component` and press return when you see the right one. This will open a terminal window inside Code, which can be closed by pressing any key once the script has finished.

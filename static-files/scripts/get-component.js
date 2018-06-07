@@ -23,7 +23,7 @@ module.exports = function getComponent(componentPath, callback) {
   prompt(
     {
       componentPath: {
-        text: '✏️  Name of component: ',
+        text: '✏️  Name of component',
         value: componentPath
       }
     },

@@ -7,7 +7,11 @@
     "es6": true,
     "node": true
   },
-  "globals": {},
+  "globals": {
+    "describe": true,
+    "it": true,
+    "browser": true
+  },
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6,
@@ -21,7 +25,6 @@
     "prettier/prettier": [
       "warn",
       {
-        "parser": "babylon",
         "singleQuote": true
       }
     ],

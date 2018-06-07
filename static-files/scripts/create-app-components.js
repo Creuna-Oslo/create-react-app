@@ -8,7 +8,6 @@ const path = require('path');
 const prettier = require('prettier');
 
 const utils = require('./utils');
-const eslintrc = require('../.eslintrc.json');
 
 const componentDirectory = path.join(__dirname, '..', 'source', 'components');
 
@@ -94,7 +93,7 @@ klaw(componentDirectory, { filter })
 
     fs.writeFile(
       path.join(__dirname, '..', 'source', fileName),
-      prettier.format(fileContent, eslintrc.rules['prettier/prettier'][1]),
+      prettier.format(fileContent, utils.prettierConfig),
       {},
       err => {
         if (!err) {

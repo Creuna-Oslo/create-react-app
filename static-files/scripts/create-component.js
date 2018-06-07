@@ -8,16 +8,15 @@ const prettier = require('prettier');
 const createjsxFileContents = require('./create-jsx-file-contents');
 const prompt = require('./prompt');
 const utils = require('./utils');
-const eslintrc = require('../.eslintrc.json');
 
 prompt(
   {
     componentName: {
-      text: 'Name of component: ',
+      text: 'Name of component',
       value: process.argv[2]
     },
     shouldBeStateful: {
-      text: 'Should component have state? (Y/N): ',
+      text: 'Should component have state?',
       type: Boolean,
       value: process.argv.indexOf('-s') !== -1 ? true : undefined
     }
@@ -81,7 +80,7 @@ function createComponent(componentName, shouldBeStateful) {
           pascalComponentName,
           shouldBeStateful
         ),
-        eslintrc.rules['prettier/prettier'][1]
+        utils.prettierConfig
       ),
       {},
       err => {
@@ -138,7 +137,7 @@ function createComponent(componentName, shouldBeStateful) {
       ),
       prettier.format(
         `import ${pascalComponentName} from './${componentName}'; export default ${pascalComponentName};`,
-        eslintrc.rules['prettier/prettier'][1]
+        utils.prettierConfig
       ),
       {},
       err => {

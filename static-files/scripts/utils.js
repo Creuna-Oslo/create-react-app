@@ -62,9 +62,15 @@ function findUndefinedVars(jsString) {
     }));
 }
 
+const prettierConfig = Object.assign(
+  { parser: 'babylon' },
+  eslintrc.rules['prettier/prettier'][1]
+);
+
 module.exports = {
   canConvertToStateless,
   findUndefinedVars,
   jsToLines,
-  kebabToPascal
+  kebabToPascal,
+  prettierConfig
 };

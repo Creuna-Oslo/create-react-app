@@ -8,14 +8,13 @@ const prettier = require('prettier');
 const createjsxFileContents = require('./create-mockup-jsx-file-contents');
 const prompt = require('./prompt');
 const utils = require('./utils');
-const eslintrc = require('../.eslintrc.json');
 
 prompt(
   {
-    componentName: { text: 'Name of page: ', value: process.argv[2] },
+    componentName: { text: 'Name of page', value: process.argv[2] },
     humanReadableName: {
       optional: true,
-      text: 'Human readable name (optional): ',
+      text: 'Human readable name (optional)',
       value: process.argv[3]
     }
   },
@@ -68,7 +67,7 @@ function createMockupPage(componentName, humanReadableName) {
           pascalComponentName,
           humanReadableName
         ),
-        eslintrc.rules['prettier/prettier'][1]
+        utils.prettierConfig
       ),
       {},
       err => {
@@ -104,7 +103,7 @@ function createMockupPage(componentName, humanReadableName) {
       path.join(folderPath, indexFilename),
       prettier.format(
         `import ${pascalComponentName} from './${componentName}'; export default ${pascalComponentName};`,
-        eslintrc.rules['prettier/prettier'][1]
+        utils.prettierConfig
       ),
       {},
       err => {
