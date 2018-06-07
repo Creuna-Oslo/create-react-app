@@ -8,6 +8,7 @@ const App = ({ children, css, js }) => (
       {css.map((file, index) => (
         <link key={index} rel="stylesheet" href={`/${file}`} />
       ))}
+      <meta charSet="utf-8" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
