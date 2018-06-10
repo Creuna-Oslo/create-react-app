@@ -4,8 +4,7 @@ const chalk = require('chalk');
 const fs = require('fs');
 const { copySync, ensureDirSync } = require('fs-extra');
 const path = require('path');
-
-const prompt = require('./utils/prompt');
+const prompt = require('@creuna/prompt');
 
 const createApiHelper = require('./templates/api-helper/create-api-helper');
 const createAppComponent = require('./templates/app-component/create-app-component');
@@ -13,7 +12,7 @@ const createHomeComponent = require('./templates/home-component/create-home-comp
 const createPackageJson = require('./templates/package-json/create-package-json');
 const filterFiles = require('./utils/filter-files');
 
-module.exports = function(projectPath) {
+module.exports = async function(projectPath) {
   const isAbsolutePath =
     projectPath && (projectPath[0] === '~' || projectPath[0] === '/');
 
@@ -54,116 +53,107 @@ module.exports = function(projectPath) {
     }
   }
 
-  prompt(
-    {
-      projectName: {
-        text: '🚀  Project name (kebab-case)'
-      },
-      authorName: {
-        text: '😸  Your full name'
-      },
-      authorEmail: {
-        text: '💌  Your email address'
-      },
-      useApiHelper: {
-        text: '☁️  Include API-helper?',
-        type: Boolean
-      },
-      useMessenger: {
-        text: '💬  Include message helper for API?',
-        type: Boolean
-      },
-      useAnalyticsHelper: {
-        text: '📈  Include Analytics helper?',
-        type: Boolean
-      },
-      useResponsiveImages: {
-        text: '🖼️  Include responsive images helper?',
-        type: Boolean
-      }
+  const {
+    authorEmail,
+    authorName,
+    projectName,
+    useApiHelper,
+    useAnalyticsHelper,
+    useMessenger,
+    useResponsiveImages
+  } = await prompt({
+    projectName: {
+      text: '🚀  Project name (kebab-case)'
     },
-    ({
-      authorEmail,
-      authorName,
-      projectName,
-      useApiHelper,
+    authorName: {
+      text: '😸  Your full name'
+    },
+    authorEmail: {
+      text: '💌  Your email address'
+    },
+    useApiHelper: {
+      text: '☁️  Include API-helper?',
+      type: Boolean
+    },
+    useMessenger: {
+      text: '💬  Include message helper for API?',
+      type: Boolean
+    },
+    useAnalyticsHelper: {
+      text: '📈  Include Analytics helper?',
+      type: Boolean
+    },
+    useResponsiveImages: {
+      text: '🖼️  Include responsive images helper?',
+      type: Boolean
+    }
+  });
+
+  // Make build directory if it doesn't exist
+  ensureDirSync(buildDir);
+
+  copySync(path.join(__dirname, 'static-files'), buildDir, {
+    filter: filterFiles.bind(null, {
       useAnalyticsHelper,
       useMessenger,
       useResponsiveImages
-    }) => {
-      // Make build directory if it doesn't exist
-      ensureDirSync(buildDir);
+    })
+  });
 
-      copySync(path.join(__dirname, 'static-files'), buildDir, {
-        filter: filterFiles.bind(null, {
-          useAnalyticsHelper,
-          useMessenger,
-          useResponsiveImages
-        })
-      });
+  // package.json
+  fs.writeFileSync(
+    path.join(buildDir, 'package.json'),
+    createPackageJson({
+      authorEmail,
+      authorName,
+      projectName,
+      useAnalyticsHelper,
+      useMessenger
+    })
+  );
 
-      // package.json
-      fs.writeFileSync(
-        path.join(buildDir, 'package.json'),
-        createPackageJson({
-          authorEmail,
-          authorName,
-          projectName,
-          useAnalyticsHelper,
-          useMessenger
-        })
-      );
+  // eslintrc
+  // This was moved to 'templates' because it messed up autoformatting when editing files in 'static-files'
+  fs.copyFileSync(
+    path.join(templateDir, 'eslintrc/.eslintrc.json'),
+    path.join(buildDir, '.eslintrc.json')
+  );
 
-      // eslintrc
-      // This was moved to 'templates' because it messed up autoformatting when editing files in 'static-files'
-      fs.copyFileSync(
-        path.join(templateDir, 'eslintrc/.eslintrc.json'),
-        path.join(buildDir, '.eslintrc.json')
-      );
+  // api-helper
+  if (useApiHelper) {
+    fs.writeFileSync(
+      path.join(buildDir, 'source/js/api-helper.js'),
+      createApiHelper({ useAnalyticsHelper, useMessenger })
+    );
+  }
 
-      // api-helper
-      if (useApiHelper) {
-        fs.writeFileSync(
-          path.join(buildDir, 'source/js/api-helper.js'),
-          createApiHelper({ useAnalyticsHelper, useMessenger })
-        );
-      }
+  // app.jsx
+  fs.writeFileSync(
+    path.join(buildDir, 'source/mockup/app.jsx'),
+    createAppComponent(projectName)
+  );
 
-      // app.jsx
-      fs.writeFileSync(
-        path.join(buildDir, 'source/mockup/app.jsx'),
-        createAppComponent(projectName)
-      );
+  // home.jsx
+  fs.writeFileSync(
+    path.join(buildDir, 'source/mockup/pages/home.jsx'),
+    createHomeComponent(projectName)
+  );
 
-      // home.jsx
-      fs.writeFileSync(
-        path.join(buildDir, 'source/mockup/pages/home.jsx'),
-        createHomeComponent(projectName)
-      );
+  console.log(`\n🦄  ${chalk.greenBright('All done!')} 🌈 \n`);
+  console.log('Next steps:');
 
-      // prompt-script
-      fs.copyFileSync(
-        path.join(__dirname, 'utils/prompt.js'),
-        path.join(buildDir, 'scripts/prompt.js')
-      );
+  if (projectPath) {
+    console.log(chalk.blueBright(`• cd ${projectPath}`));
+  }
 
-      console.log(`\n🦄  ${chalk.greenBright('All done!')} 🌈 \n`);
-      console.log('Next steps:');
-
-      if (projectPath) {
-        console.log(chalk.blueBright(`• cd ${projectPath}`));
-      }
-
-      console.log(
-        `• ${chalk.blueBright('yarn')} or ${chalk.cyan(
-          'npm install'
-        )} to install dependencies,`
-      );
-      console.log(
-        `• ${chalk.blueBright('yarn dev')} or ${chalk.cyan(
-          'npm run dev'
-        )} to start working!\n`
-      );
-    }
+  console.log(
+    `• ${chalk.blueBright('yarn')} or ${chalk.cyan(
+      'npm install'
+    )} to install dependencies,`
+  );
+  console.log(
+    `• ${chalk.blueBright('yarn dev')} or ${chalk.cyan(
+      'npm run dev'
+    )} to start working!\n`
   );
 };

@@ -24,7 +24,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist && node ./index.js dist",
+    "build": "rm -rf dist && node ./bin/index.js dist",
     "lint": "eslint --ext js,jsx ./source",
     "lint:fix": "eslint --ext js,jsx ./source --fix"
   },
@@ -47,6 +47,7 @@
     "eslint-plugin-prettier": "^2.4.0"
   },
   "dependencies": {
+    "@creuna/prompt": "^1.0.0",
     "chalk": "^2.1.0",
     "fs-extra": "^6.0.1",
     "lodash": "^4.17.4",
