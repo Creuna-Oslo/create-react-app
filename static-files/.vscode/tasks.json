@@ -6,7 +6,7 @@
     {
       "label": "stateful - Convert to stateful component",
       "type": "shell",
-      "command": "creuna stateful ${file}",
+      "command": "npx creuna-stateful ${file}",
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -18,7 +18,7 @@
     {
       "label": "stateless - Convert to stateless component",
       "type": "shell",
-      "command": "creuna stateless ${file}",
+      "command": "npx creuna-stateless ${file}",
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -30,7 +30,7 @@
     {
       "label": "component - Create new component",
       "type": "shell",
-      "command": "creuna component",
+      "command": "npx creuna-component",
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -42,7 +42,7 @@
     {
       "label": "page - Create new mockup page",
       "type": "shell",
-      "command": "creuna page",
+      "command": "npx creuna-page",
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -54,7 +54,7 @@
     {
       "label": "Rename component",
       "type": "shell",
-      "command": "creuna rename ${file}",
+      "command": "npx creuna-rename ${file}",
       "presentation": {
         "echo": true,
         "reveal": "always",

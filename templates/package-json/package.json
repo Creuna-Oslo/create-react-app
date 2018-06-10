@@ -19,6 +19,7 @@
     "to-stateless": "node scripts/convert-to-stateless-component"
   },
   "dependencies": {
+    "@creuna/react-scripts": "^1.0.0",
     "@creuna/utils": "^0.3.3",
     "autoprefixer": "^8.5.1",
     "babel-core": "^6.26.0",
