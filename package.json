@@ -26,7 +26,8 @@
   "scripts": {
     "build": "rm -rf dist && node ./index.js dist",
     "lint": "eslint --ext js,jsx ./source",
-    "lint:fix": "eslint --ext js,jsx ./source --fix"
+    "lint:fix": "eslint --ext js,jsx ./source --fix",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
