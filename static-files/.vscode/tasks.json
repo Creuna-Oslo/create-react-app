@@ -4,10 +4,9 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "to-stateful - Convert to stateful component",
+      "label": "stateful - Convert to stateful component",
       "type": "shell",
-      "command":
-        "node ${workspaceFolder}/scripts/convert-to-stateful-component ${file}",
+      "command": "creuna stateful ${file}",
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -17,10 +16,9 @@
       "problemMatcher": []
     },
     {
-      "label": "to-stateless - Convert to stateless component",
+      "label": "stateless - Convert to stateless component",
       "type": "shell",
-      "command":
-        "node ${workspaceFolder}/scripts/convert-to-stateless-component ${file}",
+      "command": "creuna stateless ${file}",
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -32,7 +30,7 @@
     {
       "label": "component - Create new component",
       "type": "shell",
-      "command": "node ${workspaceFolder}/scripts/create-component",
+      "command": "creuna component",
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -42,9 +40,9 @@
       "problemMatcher": []
     },
     {
-      "label": "mockup - Create new mockup page",
+      "label": "page - Create new mockup page",
       "type": "shell",
-      "command": "node ${workspaceFolder}/scripts/create-mockup-page",
+      "command": "creuna page",
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -56,8 +54,7 @@
     {
       "label": "Rename component",
       "type": "shell",
-      "command":
-        "node ${workspaceFolder}/scripts/rename-component ${fileBasenameNoExtension}",
+      "command": "creuna rename ${file}",
       "presentation": {
         "echo": true,
         "reveal": "always",

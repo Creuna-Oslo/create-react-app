@@ -3,12 +3,12 @@
 // NOTE: This file is run pre build and creates `app.components.js`.
 const chalk = require('chalk');
 const fs = require('fs');
+const kebabToPascal = require('@creuna/utils/kebab-to-pascal').default;
 const klaw = require('klaw');
 const path = require('path');
 const prettier = require('prettier');
 
-const utils = require('./utils');
-
+const prettierConfig = require('./prettier-config');
 const componentDirectory = path.join(__dirname, '..', 'source', 'components');
 
 const disclaimers = [
@@ -45,7 +45,7 @@ klaw(componentDirectory, { filter })
         const componentName =
           folderName[0] === folderName[0].toUpperCase()
             ? folderName
-            : utils.kebabToPascal(slugs[slugs.length - 2]);
+            : kebabToPascal(slugs[slugs.length - 2]);
 
         components[componentName] = `./components${item.path
           .replace(componentDirectory, '')
@@ -93,7 +93,7 @@ klaw(componentDirectory, { filter })
 
     fs.writeFile(
       path.join(__dirname, '..', 'source', fileName),
-      prettier.format(fileContent, utils.prettierConfig),
+      prettier.format(fileContent, prettierConfig),
       {},
       err => {
         if (!err) {
