@@ -1,6 +1,6 @@
 {
   "name": "@creuna/create-react-app",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": {
     "name": "Asbjorn Hegdahl",
     "email": "asbjorn.hegdahl@creuna.no"
@@ -49,6 +49,7 @@
     "eslint-plugin-prettier": "^2.4.0"
   },
   "dependencies": {
+    "@creuna/prompt": "^1.0.0",
     "chalk": "^2.1.0",
     "fs-extra": "^6.0.1",
     "lodash": "^4.17.4",
