@@ -10,7 +10,7 @@ console.log(
   `🤗  Hey! ${blue('creuna-new')} has been deprecated. Use ${blue(
     '@creuna/cli'
   )} instead! It's much nicer.
-  • ${blue('yarn remove -g @creuna/create-react-app')} or ${cyan(
+  • ${blue('yarn global remove @creuna/create-react-app')} or ${cyan(
     'npm uninstall -g @creuna/create-react-app'
   )}
   • ${blue('yarn global add @creuna/cli')} or ${cyan(
