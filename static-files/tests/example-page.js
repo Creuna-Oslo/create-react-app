@@ -10,19 +10,20 @@ describe('Example test', () => {
 
   it('navigates to sample page', () => {
     browser.click('a');
-    expect(browser.getText('h1')).to.equal('Hey 🕶');
+    // It's smart to use data attributes to target elements so that you don't accidentally break tests when renaming css class names or tag names.
+    expect(browser.getText('[data-title]')).to.equal('Hey 🕶');
   });
 
   it('detects input method', () => {
     expect(browser.getAttribute('html', 'class')).to.equal('');
-    browser.click('h1');
+    browser.click('[data-title]');
     expect(browser.getAttribute('html', 'class')).to.equal(
       'mouse-user no-touchevents'
     );
   });
 
   it('navigates back to front page', () => {
-    browser.back();
+    browser.click('[data-back-button]');
     expect(browser.getUrl()).to.equal('http://localhost:8080/');
   });
 });
