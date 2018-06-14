@@ -25,6 +25,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "build": "rm -rf dist && node debug/index.js dist",
     "lint": "eslint --ext js,jsx ./source",
     "lint:fix": "eslint --ext js,jsx ./source --fix",
     "test": "echo \"No test specified\" && exit 0"
