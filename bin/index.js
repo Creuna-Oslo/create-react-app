@@ -13,7 +13,9 @@ console.log(
   • ${blue('yarn remove -g @creuna/create-react-app')} or ${cyan(
     'npm uninstall -g @creuna/create-react-app'
   )}
-  • ${blue('yarn add -g @creuna/cli')} or ${cyan('npm install -g @creuna/cli')}
+  • ${blue('yarn global add @creuna/cli')} or ${cyan(
+    'npm install -g @creuna/cli'
+  )}
   • ${blue('creuna')}
   `
 );
