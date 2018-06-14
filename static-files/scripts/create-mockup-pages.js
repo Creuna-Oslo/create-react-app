@@ -4,11 +4,11 @@
 const chalk = require('chalk');
 const fs = require('fs');
 const klaw = require('klaw');
+const kebabToPascal = require('@creuna/utils/kebab-to-pascal').default;
 const path = require('path');
 const prettier = require('prettier');
 
-const utils = require('./utils');
-
+const prettierConfig = require('./prettier-config');
 const pagesDirectory = path.join(__dirname, '..', 'source', 'mockup', 'pages');
 
 const disclaimers = [
@@ -44,7 +44,7 @@ klaw(pagesDirectory, { filter })
         const componentName =
           folderName[0] === folderName[0].toUpperCase()
             ? folderName
-            : utils.kebabToPascal(slugs[slugs.length - 2]);
+            : kebabToPascal(slugs[slugs.length - 2]);
 
         const fileContent = fs.readFileSync(item.path, { encoding: 'utf-8' });
         const firstLine = fileContent.split(/(?:\r\n|\r|\n)/g)[0];
@@ -151,7 +151,7 @@ klaw(pagesDirectory, { filter })
 
     fs.writeFile(
       path.join(__dirname, '..', 'source', 'mockup', 'pages', fileName),
-      prettier.format(fileContent, utils.prettierConfig),
+      prettier.format(fileContent, prettierConfig),
       {},
       err => {
         if (!err) {
