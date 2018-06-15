@@ -9,7 +9,7 @@ React app boilerplate
 #### Install
 
 ```
-npm install -g @creuna/create-react-app
+npm install -g @creuna/cli
 ```
 
 #### Create new app
@@ -17,13 +17,13 @@ npm install -g @creuna/create-react-app
 **Requires node >= 7.5.x**
 
 ```
-creuna-new
+creuna new
 ```
 
 This will install files to the **current working directory**, so make sure you `cd` to where you want to install. Alternatively, you can provide a path like this (relative to the current working directory):
 
 ```
-creuna-new projects/my-project
+creuna new projects/my-project
 ```
 
 ## Options
