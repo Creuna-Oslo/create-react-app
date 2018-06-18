@@ -8,18 +8,12 @@
     "analyze:static": "node scripts/create-app-components && webpack --progress --mode=production --env.static --env.analyzer",
     "build": "node scripts/create-app-components && webpack --mode=production",
     "build:static": "node scripts/create-app-components && node scripts/create-mockup-pages && webpack --mode=production --env.static",
-    "component": "node scripts/create-component",
     "dev": "node scripts/create-app-components && node scripts/create-mockup-pages && webpack-dev-server --mode=development --env.static",
     "lint": "eslint --ext js,jsx ./source",
     "lint:fix": "eslint --ext js,jsx ./source --fix",
-    "mockup": "node scripts/create-mockup-page",
-    "rename": "node scripts/rename-component",
-    "test:ui": "chimp ./chimpconfig.js",
-    "to-stateful": "node scripts/convert-to-stateful-component",
-    "to-stateless": "node scripts/convert-to-stateless-component"
+    "test:ui": "chimp ./chimpconfig.js"
   },
   "dependencies": {
-    "@creuna/react-scripts": "^1.0.0",
     "@creuna/utils": "^0.3.3",
     "autoprefixer": "^8.5.1",
     "babel-core": "^6.26.0",
