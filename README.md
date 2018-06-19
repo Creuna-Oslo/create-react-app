@@ -18,15 +18,7 @@ The React app relies on `node-gyp` which means you might have to install some th
 
 **Requires node >= 7.5.x**
 
-```
-creuna new
-```
-
-This will install files to the **current working directory**, so make sure you `cd` to where you want to install. Alternatively, you can provide a path like this (relative to the current working directory):
-
-```
-creuna new projects/my-project
-```
+Running this from `@creuna/cli` will install files to the **current working directory**, so make sure you `cd` to where you want to install. Alternatively, you can provide a path like this (relative to the current working directory):
 
 ## Options
 
