@@ -4,15 +4,17 @@ React app boilerplate
 
 [![npm version](https://img.shields.io/npm/v/@creuna/create-react-app.svg?style=flat)](https://www.npmjs.com/package/@creuna/create-react-app)
 
-## Usage
+## 👩‍💻 Usage
 
-#### Install
+We recommend running this from [@creuna/cli](https://github.com/Creuna-Oslo/cli).
 
-```
-npm install -g @creuna/cli
-```
+If you want to create a new app from JavaScript, this is the right module for you.
 
-#### Create new app
+### Dependencies
+
+The React app relies on `node-gyp` which means you might have to install some things to get it running. Please see [node-gyp docs](https://github.com/nodejs/node-gyp#installation) for instructions for your OS if you run into trouble.
+
+### Create new app
 
 **Requires node >= 7.5.x**
 
@@ -210,64 +212,11 @@ You can use these classnames to provide alternative styling based on input metho
 * Put tests in `./tests` (or provide an alternative path in `chimpconfig.js`
 * Test files can be named anything, and subfolders are supported.
 
-## Scripts
-
-Included is a couple of utility scripts for lazy people. You can use these from the terminal or from within VS Code if you use that.
-
-### Create new component
-
-`yarn component component-name`
-
-This creates the folder `source/components/component-name` and puts `component-name.jsx`, `component-name.scss` and `index.js` inside it. Sweeeeeet! 😄 You do need to restart webpack dev server in order for the `scss` file to be noticed by webpack.
-
----
-
-### Create new mockup page
-
-`yarn mockup page-name`
-
-Works much like the above script, but does not create a `.scss` file and creates a `.json` file for mockup data instead. You need to restart webpack dev server in order for the new page to show up on the front page of the mockup.
-
----
-
-### Rename component
-
-`yarn rename old-name new-name`. This will rename:
-
-* the `old-name` folder
-* `old-name.jsx`
-* `old-name.scss`
-* The component name in `old-name.jsx` and `index.js`
-* all css class names in `old-name.jsx` and `old-name.scss`
-
-If you have sub-components in the same folder, these need to be renamed manually.
-
----
-
-### Convert component to stateless
-
-`yarn to-stateless component-name`
-
-This will convert `source/components/component-name` to a stateless component if it can. These things need to happen before you can convert:
-
-* Remove all lifecycle methods
-* Remove all references to `this.state`
-* Remove all refs
-
-You can usually tell if a component can be converted to stateless by the eslint warning saying that it should be converted to stateless.
-
----
-
-### Convert component to stateful
-
-`yarn to-stateful component-name`
-
-This will convert `source/components/component-name` to a stateful component.
-
 ## VS Code tasks
 
-If you're using VS Code, you can run the above scripts from within the editor. Running tasks this way is nice because `rename`, `to-stateful` and `to-stateless` will not require any typing if you already have the file you want to convert/rename open in your editor.
+`./.vscode/tasks.json` is included which enables you to run scripts from [@creuna/react-scripts](https://github.com/Creuna-Oslo/react-scripts) if you're using VS Code.
+Running tasks this way is nice because the currently open file in Code is used as input for some of the scripts which means you can type less.
 
-Open the Command Pallette (`View -> Command Pallette`) or `⇧⌘P`, type `run task` and select `Tasks: Run Task`. Then, start typing the name of the script you want to run, like `rename` or `component` and press return when you see the right one. This will open a terminal window inside Code, which can be closed by pressing any key once the script has finished.
+Open the Command Pallette (`View -> Command Pallette`) or `⇧⌘P`, type `run task` and select `Tasks: Run Task`. Then, start typing the name of the script you want to run, like `rename` or `component` and press Return when you see the right one. This will open a terminal window inside Code, which can be closed by pressing any key once the script has finished.
 
 If you want to run the scripts from within Code, it's a good idea to map the `Run Task` command to a keyboard shortcut, to avoid excessive typing.
