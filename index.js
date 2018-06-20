@@ -140,6 +140,7 @@ module.exports = async function(projectPath, callback) {
   );
 
   callback(
+    buildDir,
     [
       { emoji: '🦄', text: chalk.greenBright('All done!') },
       { text: 'Next steps:' }
