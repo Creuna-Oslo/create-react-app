@@ -12,7 +12,7 @@ const createHomeComponent = require('./templates/home-component/create-home-comp
 const createPackageJson = require('./templates/package-json/create-package-json');
 const filterFiles = require('./utils/filter-files');
 
-module.exports = async function(projectPath) {
+module.exports = async function(projectPath, callback) {
   const isAbsolutePath =
     projectPath && (projectPath[0] === '~' || projectPath[0] === '/');
 
@@ -139,21 +139,25 @@ module.exports = async function(projectPath) {
     createHomeComponent(projectName)
   );
 
-  console.log(`\n🦄  ${chalk.greenBright('All done!')} 🌈 \n`);
-  console.log('Next steps:');
-
-  if (projectPath) {
-    console.log(chalk.blueBright(`• cd ${projectPath}`));
-  }
-
-  console.log(
-    `• ${chalk.blueBright('yarn')} or ${chalk.cyan(
-      'npm install'
-    )} to install dependencies,`
-  );
-  console.log(
-    `• ${chalk.blueBright('yarn dev')} or ${chalk.cyan(
-      'npm run dev'
-    )} to start working!\n`
+  callback(
+    [
+      { emoji: '🦄', text: chalk.greenBright('All done!') },
+      { text: 'Next steps:' }
+    ]
+      .concat(
+        projectPath ? { text: chalk.blueBright(`• cd ${projectPath}`) } : []
+      )
+      .concat([
+        {
+          text: `• ${chalk.blueBright('yarn')} or ${chalk.cyan(
+            'npm install'
+          )} to install dependencies,`
+        },
+        {
+          text: `• ${chalk.blueBright('yarn dev')} or ${chalk.cyan(
+            'npm run dev'
+          )} to start working!\n`
+        }
+      ])
   );
 };
