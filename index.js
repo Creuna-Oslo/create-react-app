@@ -12,7 +12,7 @@ const createHomeComponent = require('./templates/home-component/create-home-comp
 const createPackageJson = require('./templates/package-json/create-package-json');
 const filterFiles = require('./utils/filter-files');
 
-module.exports = async function(projectPath) {
+module.exports = function(projectPath) {
   return new Promise(async resolve => {
     const isAbsolutePath =
       projectPath && (projectPath[0] === '~' || projectPath[0] === '/');
