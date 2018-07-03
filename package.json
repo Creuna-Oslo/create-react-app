@@ -28,9 +28,10 @@
     "build": "rm -rf dist && node debug/index.js dist",
     "lint": "eslint --ext js,jsx ./source",
     "lint:fix": "eslint --ext js,jsx ./source --fix",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "ava --verbose --serial"
   },
   "devDependencies": {
+    "ava": "^0.25.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.1.2",
     "babel-plugin-syntax-jsx": "^6.18.0",
