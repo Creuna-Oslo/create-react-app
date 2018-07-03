@@ -8,7 +8,7 @@ const paths = require('../fixtures/paths');
 test('Throws on non-empty folder', async t => {
   // Create a folder inside 'dist' to make it non-empty
   await fsExtra.ensureDir(path.join(paths.build, 'something'));
-  await t.throws(canWriteFiles());
+  await t.throws(canWriteFiles('dist'));
 });
 
 test('Succeeds on empty folder', async t => {
