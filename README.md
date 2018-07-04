@@ -14,11 +14,7 @@ If you want to create a new app from JavaScript, this is the right module for yo
 
 The React app relies on `node-gyp` which means you might have to install some things to get it running. Please see [node-gyp docs](https://github.com/nodejs/node-gyp#installation) for instructions for your OS if you run into trouble.
 
-### Create new app
-
 **Requires node >= 7.5.x**
-
-Running this from `@creuna/cli` will install files to the **current working directory**, so make sure you `cd` to where you want to install. Alternatively, you can provide a path like this (relative to the current working directory):
 
 ## Options
 
