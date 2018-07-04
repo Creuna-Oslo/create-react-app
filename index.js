@@ -23,7 +23,6 @@ function writeFiles({
   useResponsiveImages
 }) {
   return new Promise(async (resolve, reject) => {
-    const buildDir = path.join(process.cwd(), projectPath || '');
     const templateDir = path.join(__dirname, 'templates');
 
     try {
@@ -35,9 +34,9 @@ function writeFiles({
     // If the promise tries to catch errors asynchronously (in a .catch()), Node will output a 'UnhandledPromiseRejectionWarning' warning which hides the actual error in a wall of text and does not output a stack trace. Reject synchronously to avoid this
     try {
       // Make build directory if it doesn't exist
-      ensureDirSync(buildDir);
+      ensureDirSync(projectPath);
 
-      copySync(path.join(__dirname, 'static-files'), buildDir, {
+      copySync(path.join(__dirname, 'static-files'), projectPath, {
         filter: filterFiles.bind(null, {
           useAnalyticsHelper,
           useMessenger,
@@ -47,7 +46,7 @@ function writeFiles({
 
       // package.json
       fs.writeFileSync(
-        path.join(buildDir, 'package.json'),
+        path.join(projectPath, 'package.json'),
         createPackageJson({
           authorEmail,
           authorName,
@@ -61,37 +60,42 @@ function writeFiles({
       // This was moved to 'templates' because it messed up autoformatting when editing files in 'static-files'
       fs.copyFileSync(
         path.join(templateDir, 'eslintrc/.eslintrc.json'),
-        path.join(buildDir, '.eslintrc.json')
+        path.join(projectPath, '.eslintrc.json')
       );
 
       // api-helper
       if (useApiHelper) {
         fs.writeFileSync(
-          path.join(buildDir, 'source/js/api-helper.js'),
+          path.join(projectPath, 'source/js/api-helper.js'),
           createApiHelper({ useAnalyticsHelper, useMessenger })
         );
       }
 
       // app.jsx
       fs.writeFileSync(
-        path.join(buildDir, 'source/mockup/app.jsx'),
+        path.join(projectPath, 'source/mockup/app.jsx'),
         createAppComponent(projectName)
       );
 
       // home.jsx
       fs.writeFileSync(
-        path.join(buildDir, 'source/mockup/pages/home.jsx'),
+        path.join(projectPath, 'source/mockup/pages/home.jsx'),
         createHomeComponent(projectName)
       );
 
       return resolve({
-        buildDir,
         messages: [
-          { emoji: '🦄', text: chalk.greenBright('All done!') },
+          { emoji: '🦄', text: chalk.greenBright('All done!\n') },
           { text: 'Next steps:' }
         ]
           .concat(
-            projectPath ? { text: chalk.blueBright(`• cd ${projectPath}`) } : []
+            projectPath !== process.cwd()
+              ? {
+                  text: `• ${chalk.blueBright(
+                    `cd ${path.basename(projectPath)}`
+                  )}`
+                }
+              : []
           )
           .concat([
             {

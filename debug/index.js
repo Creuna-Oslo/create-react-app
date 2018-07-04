@@ -1,6 +1,7 @@
 /* eslint-env node */
 /* eslint-disable no-console */
 const chalk = require('chalk');
+const path = require('path');
 
 const { canWriteFiles, writeFiles } = require('../index');
 
@@ -13,13 +14,15 @@ const logMessage = ({ emoji, text }) => {
   console.log(`${emoji ? `${emoji} ` : ''} ${text}`);
 };
 
-canWriteFiles(process.argv[2])
+const projectPath = path.join(process.cwd(), process.argv[2] || '');
+
+canWriteFiles(projectPath)
   .then(async () => {
     writeFiles({
       authorEmail: 'john.doe@email.com',
       authorName: 'John Doe',
       projectName: 'my-project',
-      projectPath: process.argv[2],
+      projectPath,
       useApiHelper: true,
       useAnalyticsHelper: true,
       useMessenger: true,
