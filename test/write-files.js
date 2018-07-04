@@ -3,19 +3,31 @@ const fsExtra = require('fs-extra');
 const test = require('ava');
 
 const { writeFiles } = require('../index');
-const options = require('../fixtures/options');
-const paths = require('../fixtures/paths');
+const getOptions = require('../fixtures/get-options');
+const getPaths = require('../fixtures/get-paths');
+
+function getPathsAndOptions() {
+  const paths = getPaths();
+  const options = getOptions(paths.build);
+
+  return { paths, options };
+}
 
 test('Writes files', async t => {
   t.plan(2);
-  await fsExtra.emptyDir(paths.build);
+
+  const { paths, options } = getPathsAndOptions();
+
   await t.notThrows(writeFiles(options.allModules));
+
   t.snapshot(fs.readdirSync(paths.build).filter(path => path !== '.DS_Store'));
 });
 
 test('Writes info to package.json', async t => {
   t.plan(2);
 
+  const { paths, options } = getPathsAndOptions();
+  await writeFiles(options.allModules);
   const { name, author } = await fsExtra.readJson(paths.packageJson);
 
   t.is(name, 'my-project');
@@ -26,6 +38,9 @@ const exists = fs.existsSync;
 
 test('Writes optional files when selected', async t => {
   t.plan(10);
+
+  const { paths, options } = getPathsAndOptions();
+  await writeFiles(options.allModules);
 
   t.true(exists(paths.analytics));
   t.true(exists(paths.apiHelper));
@@ -42,7 +57,7 @@ test('Writes optional files when selected', async t => {
 test(`Doesn't write optional files when not selected`, async t => {
   t.plan(10);
 
-  await fsExtra.emptyDir(paths.build);
+  const { paths, options } = getPathsAndOptions();
   await writeFiles(options.noModules);
 
   t.false(exists(paths.analytics));

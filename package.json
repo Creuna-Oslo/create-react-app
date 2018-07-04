@@ -1,6 +1,6 @@
 {
   "name": "@creuna/create-react-app",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "author": {
     "name": "Asbjorn Hegdahl",
     "email": "asbjorn.hegdahl@creuna.no"
@@ -28,7 +28,7 @@
     "build": "rm -rf dist && node debug/index.js dist",
     "lint": "eslint --ext js,jsx ./source",
     "lint:fix": "eslint --ext js,jsx ./source --fix",
-    "test": "ava --verbose --serial"
+    "test": "ava --verbose"
   },
   "devDependencies": {
     "ava": "^0.25.0",
@@ -46,7 +46,8 @@
     "eslint": "^4.15.0",
     "eslint-config-prettier": "^2.2.0",
     "eslint-loader": "^1.7.0",
-    "eslint-plugin-prettier": "^2.4.0"
+    "eslint-plugin-prettier": "^2.4.0",
+    "tempy": "^0.2.1"
   },
   "dependencies": {
     "chalk": "^2.1.0",
