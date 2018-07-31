@@ -11,3 +11,8 @@ deploy:
   on:
     branch: master
   skip_cleanup: true
+notifications:
+  webhooks:
+    on_start: always
+    urls:
+      - secure: "EW8H6B6JskhxsDakFxUrJI1vszCseK2/nsBd77ZSTF52730nGbrnLngGgfV5JsAPc9eT5PMytrGRydEoj38Jc+jJuk1jLCsN+YjiXh8bAA8ghhYEMlaw4rGDLmymec5ZqNGyAwAc0qdbRZjoTDIsMnOENfRbSYB1myqUCsYKPtq1uCU36g7rrfMwA6XoPlZytL8pSYv9jgc/edEcPmny+/fh2Pz/mKSxkUTzJtuKMoYdjlzqcgDPuo4fyqgdQyipkGpPaLZ4uiYhcY9q2nKQvrLMU+Hr/2nbqLRrdNRdnfGZsdImcw0JpHpy6YEvhIswRiBaf9nzV9bCKEFLsm8FPtxUJap/BQ550DnQWstCKXNayhri6sRcGylFDiuXtAIpces75qxETmyD881PU53pcCuvTZenqcdFDjkAiu5VmbQeCdhMWkoM1/WTpG4hLCG02QFCnKgTn+9EekiT38N4HtorbHKK/14ibo00xv/8YLH6Hzsz8LlG574U3edtcbgqToxncHbNFm6RjDRpEQP9JAGcuC4iVO816CG6eK8GF7fAj18uYf9tx3uI2Kr90lKjfuUXqAaGdjI3gu3cwbRRO3FiQgrMeSSe4znJ5xybkJOjsQjKkUiWTSR4I/N5Vz1QTAqKlKgFpCbm0YjflSKnrjohKObwT5ucVY1O/ZCNZCo="
