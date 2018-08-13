@@ -10,6 +10,7 @@ const createApiHelper = require('./templates/api-helper/create-api-helper');
 const createAppComponent = require('./templates/app-component/create-app-component');
 const createHomeComponent = require('./templates/home-component/create-home-component');
 const createPackageJson = require('./templates/package-json/create-package-json');
+const createReadme = require('./templates/readme/create-readme');
 const filterFiles = require('./utils/filter-files');
 
 function writeFiles({
@@ -43,6 +44,12 @@ function writeFiles({
           useResponsiveImages
         })
       });
+
+      // README.md
+      fs.writeFileSync(
+        path.join(projectPath, 'README.md'),
+        createReadme({ projectName })
+      );
 
       // package.json
       fs.writeFileSync(
