@@ -111,9 +111,9 @@ When a `payload` object is present in the response, only the content of `payload
 
 If you select this the following files will be included:
 
-* `source/js/responsive-images.js`
-* `source/components/image`
-* `source/components/fluid-image`
+- `source/js/responsive-images.js`
+- `source/components/image`
+- `source/components/fluid-image`
 
 These are intended to be used with the [ImageResizer for .NET](https://imageresizing.net/) plugin. The `Image` and `FluidImage` components use `responsive-images.js` to measure the rendered images and get the URL for an image of appropriate size.
 
@@ -161,8 +161,8 @@ Webpack will copy everything from `source/mockup/api` to `/mockup/api` you can r
 
 By default, two aliases are included in `webpack.config`:
 
-* `components` which resolves to `source/components`
-* `js` which resolves to `source/js`
+- `components` which resolves to `source/components`
+- `js` which resolves to `source/js`
 
 These aliases allow you to import like this from any `js`/`jsx` file:
 
@@ -177,28 +177,13 @@ These aliases are also included in `jsconfig.json` which makes VS Code resolve t
 
 `js/input-detection.js` is included in both the `client` and `static` bundles. It checks for mouse, touch and keyboard events and puts classnames on `<html>`:
 
-* `.mouse-user`: The last event was either a mouse or touch event (this is removed when a keyboard event occurs)
-* `.touchevents`: The last event was a touch event
-* `.no-touchevents`: The last event was not a touch event
+- `.mouse-user`: The last event was either a mouse or touch event (this is removed when a keyboard event occurs)
+- `.touchevents`: The last event was a touch event
+- `.no-touchevents`: The last event was not a touch event
 
 By default, all focus outlines are disabled when the `.mouse-user` class is present (in `site.scss`). No class names are present if js is disabled in the browser, meaning focus outlines are preserved.
 
 You can use these classnames to provide alternative styling based on input method (like disabling hover effects for touch screens).
-
-## UI Testing
-
-[Chimp](https://chimp.readme.io/docs/introduction) is included for easy end to end testing. The provided config `./chimpconfig.js` uses Mocha and headless (invisible) Chrome to perform tests on the ui. There is an example test provided in `/tests/example-page.js`
-
-### Things to note
-
-* run tests with `yarn test:ui` or `npm run test:ui`.
-* **Webpack dev server needs to be running for tests to work.**
-* With the provided config, Chimp uses Mocha and WebdriverIO.
-  * Mocha provides the `describe` and `it` globals. [docs here](https://mochajs.org/)
-  * WebdriverIO provides the `browser` global. [docs here](http://webdriver.io/api.html)
-* Use Chai for test assertions. [docs here](http://www.chaijs.com/api/)
-* Put tests in `./tests` (or provide an alternative path in `chimpconfig.js`
-* Test files can be named anything, and subfolders are supported.
 
 ## VS Code tasks
 

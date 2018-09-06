@@ -11,9 +11,11 @@ module.exports = function(projectPath) {
 
     if (filesInProjectPath && filesInProjectPath.length) {
       return reject(
-        `There's already stuff in the current directory.
+        new Error(
+          `There's already stuff in the current directory.
 Found the following stuff in ${chalk.blueBright(projectPath)}:
 ${filesInProjectPath.map(fileName => `  ${fileName}\n`).join('')}`
+        )
       );
     }
 
