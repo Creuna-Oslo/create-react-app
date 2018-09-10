@@ -185,6 +185,16 @@ By default, all focus outlines are disabled when the `.mouse-user` class is pres
 
 You can use these classnames to provide alternative styling based on input method (like disabling hover effects for touch screens).
 
+## UI Testing
+
+[TestCafé](https://devexpress.github.io/testcafe/) is included for easy end to end testing. There is an example test provided in `/tests/example-page.js`.
+
+### Things to note
+
+- run tests with `yarn test:ui` or `npm run test:ui`
+  - The development server must already be running for this to work (`yarn dev` or `npm run dev`)
+- TestCafé will find and run all tests in located directly in `./tests`
+
 ## VS Code tasks
 
 `./.vscode/tasks.json` is included which enables you to run scripts from [@creuna/react-scripts](https://github.com/Creuna-Oslo/react-scripts) if you're using VS Code.
