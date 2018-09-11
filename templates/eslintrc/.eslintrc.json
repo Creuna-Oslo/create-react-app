@@ -53,5 +53,10 @@
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "semi": 1
+  },
+  "settings": {
+    "react": {
+      "version": "^16.3.2"
+    }
   }
 }
