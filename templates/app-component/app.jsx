@@ -18,7 +18,9 @@ const App = ({ children, css, js }) => (
     </head>
     <body>
       <div id="mount-point">{children}</div>
-      {js.map((file, index) => <script key={index} src={`/${file}`} />)}
+      {js.map((file, index) => (
+        <script key={index} src={`/${file}`} />
+      ))}
     </body>
   </html>
 );
