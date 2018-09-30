@@ -48,6 +48,7 @@
     "react/no-direct-mutation-state": 2,
     "react/no-multi-comp": 1,
     "react/no-unused-prop-types": 1,
+    "react/no-typos": 2,
     "react/prefer-stateless-function": 1,
     "react/prop-types": 1,
     "react/react-in-jsx-scope": 2,
