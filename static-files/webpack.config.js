@@ -50,14 +50,9 @@ module.exports = (env = {}, options = {}) => {
 
       // NOTE: when using mockup with 'yarn dev', only static.js will be served
       if (shouldBuildStaticSite) {
-        entries.static = [
-          'babel-polyfill',
-          'whatwg-fetch',
-          './source/static.js'
-        ];
+        entries.static = ['whatwg-fetch', './source/static.js'];
       } else {
         entries.client = [
-          'babel-polyfill',
           'whatwg-fetch',
           './source/js/input-detection-loader',
           'expose-loader?React!react',

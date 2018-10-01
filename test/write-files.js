@@ -18,7 +18,7 @@ test('Writes files', async t => {
 
   const { paths, options } = getPathsAndOptions();
 
-  await t.notThrows(writeFiles(options.allModules));
+  await t.notThrows(() => writeFiles(options.allModules));
 
   t.snapshot(fs.readdirSync(paths.build).filter(path => path !== '.DS_Store'));
 });
