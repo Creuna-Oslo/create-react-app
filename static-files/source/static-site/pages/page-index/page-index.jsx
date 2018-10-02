@@ -10,13 +10,11 @@ const PageIndex = () => {
   const groups = {};
 
   pages.forEach(page => {
-    const group = page.group || 'Ungrouped';
-
-    if (!groups[group]) {
-      groups[group] = [];
+    if (!groups[page.group]) {
+      groups[page.group] = [];
     }
 
-    groups[group].push(page);
+    groups[page.group].push(page);
   });
 
   const pageGroups = Object.keys(groups).map(groupName => ({
@@ -43,9 +41,9 @@ const PageIndex = () => {
             }}
           >
             {group.pages.map(page => (
-              <li key={page.url}>
-                <a href={page.url} style={{ color: 'black' }}>
-                  {page.name || page.url}
+              <li key={page.path}>
+                <a href={page.path} style={{ color: 'black' }}>
+                  {page.name || page.path}
                 </a>
               </li>
             ))}

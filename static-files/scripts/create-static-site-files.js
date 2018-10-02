@@ -27,29 +27,19 @@ klaw(pagesDirectory, { filter: item => path.basename(item)[0] !== '.' })
   .on('readable', function() {
     let item;
     while ((item = this.read())) {
-      const {
-        componentName,
-        folderName,
-        group,
-        humanReadableName,
-        path
-      } = getComponentMetadata(item);
+      const metadata = getComponentMetadata(item);
 
-      if (componentName && folderName) {
-        pages.push({
-          component: componentName,
-          group,
-          humanReadableName,
-          importFrom: './' + folderName,
-          path
-        });
+      if (Object.keys(metadata).length > 0) {
+        pages.push(getComponentMetadata(item));
       }
     }
   })
   .on('error', handleKlawError)
   .on('end', () => {
     const importStatements = pages.reduce((accumulator, page) => {
-      accumulator += `import ${page.component} from '${page.importFrom}';\n`;
+      accumulator += `import ${page.componentName} from './${
+        page.folderName
+      }';\n`;
       return accumulator;
     }, '');
 
@@ -57,7 +47,9 @@ klaw(pagesDirectory, { filter: item => path.basename(item)[0] !== '.' })
       const separator = index < pages.length - 1 ? ',' : '';
 
       accumulator += `{
-        component: ${page.component},
+        component: ${page.componentName},
+        group: '${page.group}',
+        name: '${page.name}',
         path: '${page.path}'
       }${separator}\n`;
 
