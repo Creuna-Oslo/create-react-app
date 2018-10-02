@@ -1,4 +1,8 @@
-// Eksempelgruppe/eksempelside
+/*
+group: Eksempelgruppe
+name: Eksempelside
+path: /eksempelside
+*/
 import React from 'react';
 
 import Layout from '../../layout';
@@ -6,7 +10,7 @@ import Layout from '../../layout';
 import content from './example-page.json';
 
 const ExamplePage = () => (
-  <Layout showFooter={false} showHeader={false}>
+  <Layout>
     <div className="example-page">
       <h1 data-title>{content.title}</h1>
       <div>

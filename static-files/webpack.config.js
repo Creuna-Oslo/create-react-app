@@ -9,26 +9,21 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const { readdirSync, statSync } = require('fs');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const SuppressChunksPlugin = require('suppress-chunks-webpack-plugin').default;
 
-const mockupFolder = './source/mockup/pages/';
-const mockupPaths = readdirSync(mockupFolder)
-  .filter(name => statSync(mockupFolder + name).isDirectory())
-  .map(name => '/' + name)
-  .concat('/');
+const staticSitePaths = require('./source/static-site/pages/paths');
 
 module.exports = (env = {}, options = {}) => {
   const shouldBuildStaticSite = env.static === true;
-  const shouldMinify = options.mode === 'production';
+  const isProduction = options.mode === 'production';
   const shouldUseAnalyzer = env.analyzer === true;
 
   if (shouldBuildStaticSite) {
     console.log('🖥  Building static site');
   }
 
-  if (shouldMinify) {
+  if (isProduction) {
     console.log('📦  Minifying code');
   }
 
@@ -42,23 +37,25 @@ module.exports = (env = {}, options = {}) => {
       inline: false,
       stats: 'minimal'
     },
-    devtool: shouldMinify ? 'source-map' : 'cheap-module-eval-source-map',
+    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
     entry: (() => {
       const entries = {
         style: './source/scss/style.scss'
       };
+      const clientCommons = [
+        'whatwg-fetch',
+        './source/js/input-detection-loader'
+      ];
 
-      // NOTE: when using mockup with 'yarn dev', only static.js will be served
       if (shouldBuildStaticSite) {
-        entries.static = ['whatwg-fetch', './source/static.js'];
+        entries.client = clientCommons.concat(['./source/static-client.js']);
+        entries.server = './source/static-server.js';
       } else {
-        entries.client = [
-          'whatwg-fetch',
-          './source/js/input-detection-loader',
+        entries.client = clientCommons.concat([
           'expose-loader?React!react',
           'expose-loader?ReactDOM!react-dom',
           'expose-loader?Components!./source/app.components.js'
-        ];
+        ]);
         entries.server = [
           './source/js/server-polyfills.js',
           'expose-loader?React!react',
@@ -104,7 +101,7 @@ module.exports = (env = {}, options = {}) => {
               loader: 'css-loader',
               options: {
                 importLoaders: 1,
-                minimize: shouldMinify,
+                minimize: isProduction,
                 sourceMap: true
               }
             },
@@ -140,55 +137,53 @@ module.exports = (env = {}, options = {}) => {
         paths: true
       }),
       new ManifestPlugin(),
-      new SuppressChunksPlugin([
-        {
-          name: 'style',
-          match: /\.js(.map)?$/
-        }
-      ])
+      new SuppressChunksPlugin(
+        [
+          {
+            name: 'style',
+            match: /\.js(.map)?$/
+          }
+        ].concat(shouldBuildStaticSite ? ['server'] : [])
+      ),
+      new webpack.optimize.ModuleConcatenationPlugin()
     ]
       .concat(
-        // NOTE: When https://github.com/markdalgleish/static-site-generator-webpack-plugin/pull/115 is accepted and published we can enable chunking at the same time as static site building.
         shouldBuildStaticSite
           ? [
               new StaticSiteGeneratorPlugin({
-                entry: 'static',
-                paths: mockupPaths
+                entry: 'server',
+                locals: {
+                  isProduction
+                },
+                paths: staticSitePaths
               }),
               new CopyWebpackPlugin(
                 [
-                  { from: 'source/mockup/assets', to: 'mockup/assets' },
-                  { from: 'source/mockup/api', to: 'mockup/api' }
+                  { from: 'source/static-site/assets', to: 'static/assets' },
+                  { from: 'source/static-site/api', to: 'static/api' }
                 ],
                 { copyUnmodified: true }
               )
             ]
-          : [new webpack.optimize.ModuleConcatenationPlugin()]
+          : []
       )
       .concat(shouldUseAnalyzer ? [new BundleAnalyzerPlugin()] : []),
-    optimization: shouldBuildStaticSite
-      ? undefined
-      : {
-          splitChunks: {
-            cacheGroups: {
-              commons: {
-                test: module => {
-                  if (
-                    module.resource &&
-                    /^.*\.(css|scss)$/.test(module.resource)
-                  ) {
-                    return false;
-                  }
-
-                  return (
-                    module.context && module.context.includes('node_modules')
-                  );
-                },
-                chunks: chunk => chunk.name === 'client',
-                name: 'vendor'
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: module => {
+              if (module.resource && /^.*\.(css|scss)$/.test(module.resource)) {
+                return false;
               }
-            }
+
+              return module.context && module.context.includes('node_modules');
+            },
+            chunks: chunk => chunk.name === 'client',
+            name: 'vendor'
           }
         }
+      }
+    }
   };
 };

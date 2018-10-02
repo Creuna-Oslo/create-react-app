@@ -7,8 +7,6 @@ const path = require('path');
 
 const canWriteFiles = require('./utils/can-write-files');
 const createApiHelper = require('./templates/api-helper/create-api-helper');
-const createAppComponent = require('./templates/app-component/create-app-component');
-const createHomeComponent = require('./templates/home-component/create-home-component');
 const createPackageJson = require('./templates/package-json/create-package-json');
 const createReadme = require('./templates/readme/create-readme');
 const filterFiles = require('./utils/filter-files');
@@ -77,18 +75,6 @@ function writeFiles({
           createApiHelper({ useAnalyticsHelper, useMessenger })
         );
       }
-
-      // app.jsx
-      fs.writeFileSync(
-        path.join(projectPath, 'source/mockup/app.jsx'),
-        createAppComponent(projectName)
-      );
-
-      // home.jsx
-      fs.writeFileSync(
-        path.join(projectPath, 'source/mockup/pages/home.jsx'),
-        createHomeComponent(projectName)
-      );
 
       return resolve({
         messages: [
