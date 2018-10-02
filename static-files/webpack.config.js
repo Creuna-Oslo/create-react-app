@@ -12,8 +12,6 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const SuppressChunksPlugin = require('suppress-chunks-webpack-plugin').default;
 
-const staticSitePaths = require('./source/static-site/pages/paths');
-
 module.exports = (env = {}, options = {}) => {
   const shouldBuildStaticSite = env.static === true;
   const isProduction = options.mode === 'production';
@@ -155,7 +153,7 @@ module.exports = (env = {}, options = {}) => {
                 locals: {
                   isProduction
                 },
-                paths: staticSitePaths
+                paths: require('./source/static-site/pages/paths')
               }),
               new CopyWebpackPlugin(
                 [
