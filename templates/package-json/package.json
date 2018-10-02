@@ -7,7 +7,7 @@
     "analyze": "node scripts/create-app-components && webpack --mode=production --env.analyzer",
     "analyze:static": "node scripts/create-static-site-files && webpack --progress --mode=production --env.static --env.analyzer",
     "build": "node scripts/create-app-components && webpack --mode=production",
-    "build:static": "node scripts/create-app-components && node scripts/create-static-site-files && webpack --mode=production --env.static",
+    "build:static": "node scripts/create-static-site-files && webpack --mode=production --env.static",
     "dev": "node scripts/create-static-site-files && webpack-dev-server --mode=development --env.static",
     "lint": "eslint --ext js,jsx ./source",
     "lint:fix": "eslint --ext js,jsx ./source --fix",
