@@ -116,14 +116,3 @@ If you select this the following files will be included:
 - `source/components/fluid-image`
 
 These are intended to be used with the [ImageResizer for .NET](https://imageresizing.net/) plugin. The `Image` and `FluidImage` components use `responsive-images.js` to measure the rendered images and get the URL for an image of appropriate size.
-
----
-
-### ⚙️ Include VS Code tasks?
-
-If you select this, `./.vscode/tasks.json` is included which enables you to run scripts from [@creuna/react-scripts](https://github.com/Creuna-Oslo/react-scripts) if you're using VS Code.
-Running tasks this way is nice because the currently open file in Code is used as input for some of the scripts which means you can type less.
-
-Open the Command Pallette (`View -> Command Pallette`) or `⇧⌘P`, type `run task` and select `Tasks: Run Task`. Then, start typing the name of the script you want to run, like `rename` or `component` and press Return when you see the right one. This will open a terminal window inside Code, which can be closed by pressing any key once the script has finished.
-
-If you want to run the scripts from within Code, it's a good idea to map the `Run Task` command to a keyboard shortcut, to avoid excessive typing.
