@@ -157,8 +157,14 @@ module.exports = (env = {}, options = {}) => {
               }),
               new CopyWebpackPlugin(
                 [
-                  { from: 'source/static-site/assets', to: 'static/assets' },
-                  { from: 'source/static-site/api', to: 'static/api' }
+                  {
+                    from: 'source/static-site/assets',
+                    to: 'static-site/assets'
+                  },
+                  {
+                    from: 'source/static-site/api',
+                    to: 'static-site/api'
+                  }
                 ],
                 { copyUnmodified: true }
               )

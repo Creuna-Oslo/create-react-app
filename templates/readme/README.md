@@ -86,21 +86,21 @@ Pages with the same group name will be grouped under this name.
 
 #### Assets
 
-Put your assets like fonts, icons and logos in `source/assets`. Static site content assets can be put in `source/static-site/assets`. Webpack copies everything from there to `/static/assets`, so you can refer to your static content files like this:
+Put your assets like fonts, icons and logos in `source/assets`. Static site content assets can be put in `source/static-site/assets`. Webpack copies everything from there to `/static-site/assets`, so you can refer to your static content files like this:
 
 ```json
 {
-  "imageUrl": "/static/assets/my-image.jpg"
+  "imageUrl": "/static-site/assets/my-image.jpg"
 }
 ```
 
 #### API Responses
 
-Webpack will copy everything from `source/static-site/api` to `/static/api` so you can reference your static API responses like this:
+Webpack will copy everything from `source/static-site/api` to `/static-static/api` so you can reference your static API responses like this:
 
 ```json
 {
-  "apiEndpoint": "/static/api/register-user.json"
+  "apiEndpoint": "/static-site/api/register-user.json"
 }
 ```
 

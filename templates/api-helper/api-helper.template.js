@@ -63,7 +63,7 @@ function get(endpoint) {
 }
 
 function execute(endpoint, data) {
-  if (endpoint.indexOf('/static/api') !== -1) {
+  if (endpoint.indexOf('/static-site/api') !== -1) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(request(endpoint, defaultFetchOptions));
