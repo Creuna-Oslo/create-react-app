@@ -26,7 +26,7 @@ const PageIndex = () => {
     <div
       style={{
         display: 'flex',
-        'flex-wrap': 'wrap'
+        flexWrap: 'wrap'
       }}
     >
       {pageGroups.map(group => (
