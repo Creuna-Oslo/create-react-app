@@ -10,8 +10,6 @@ const prettierConfig = require('./prettier-config');
 function writeFile(filePath, fileContent) {
   const fileName = filePath[filePath.length - 1];
 
-  console.log(`⌛️  Saving ${chalk.blueBright(fileName)}`);
-
   fs.writeFile(
     path.join.apply(null, [__dirname, ...filePath]),
     prettier.format(fileContent, prettierConfig),
