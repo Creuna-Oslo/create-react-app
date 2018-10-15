@@ -7,7 +7,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const SuppressChunksPlugin = require('suppress-chunks-webpack-plugin').default;
@@ -131,9 +130,6 @@ module.exports = (env = {}, options = {}) => {
     },
     plugins: [
       new ExtractTextPlugin('[name].[chunkhash].css'),
-      new LodashModuleReplacementPlugin({
-        paths: true
-      }),
       new ManifestPlugin(),
       new SuppressChunksPlugin(
         [
