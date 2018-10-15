@@ -31,7 +31,7 @@ function getComponentMetadata(item) {
       folderName,
       group,
       name,
-      path: url,
+      path: url.startsWith('/') ? url : '/' + url,
       slugs
     };
   }
