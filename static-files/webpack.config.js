@@ -138,9 +138,12 @@ module.exports = (env = {}, options = {}) => {
             match: /\.js(.map)?$/
           }
         ].concat(shouldBuildStaticSite ? ['server'] : [])
-      ),
-      new webpack.optimize.ModuleConcatenationPlugin()
+      )
     ]
+      .concat(
+        // NOTE: This plugin currently makes the codebase crash when recompiling using webpack-dev-server
+        isProduction ? [new webpack.optimize.ModuleConcatenationPlugin()] : []
+      )
       .concat(
         shouldBuildStaticSite
           ? [
