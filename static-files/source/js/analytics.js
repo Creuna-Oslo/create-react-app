@@ -1,10 +1,4 @@
-/*eslint no-unused-vars: 0*/
-import get from 'lodash/get';
-import merge from 'lodash/merge';
-
 import isRunningOnClient from '@creuna/utils/is-running-on-client';
-import stripUndefined from '@creuna/utils/strip-undefined';
-import tryParseJson from '@creuna/utils/try-parse-json';
 
 /* NOTE: Implement Google Tag Manager for this module to work correctly
 
