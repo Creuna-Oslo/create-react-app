@@ -17,8 +17,6 @@ import tryParseJson from '@creuna/utils/try-parse-json';
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none visibility:hidden"></iframe></noscript>
 */
 
-// NOTE: See https://docs.google.com/spreadsheets/d/1Q5eLVcFdGxVhnz-17I_V77QQeCZPPum7PwAeuMkwFms/ for the initial/incomplete/confusing tracking spec.
-
 function Timeout(fn, delay) {
   const id = setTimeout(() => {
     this.clear();
