@@ -1,3 +1,7 @@
+# 5.0.1
+
+- Removes `.creunarc.json` from the scaffolded project.
+
 # 5.0.0
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/41]()
