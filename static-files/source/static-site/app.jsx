@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// This file renders the basic html pages when running the mockup
-const App = ({ children, css, js }) => (
+const App = ({ children, css, js, shouldIncludeWebpackDevServerJs, title }) => (
   <html>
     <head>
       {css.map((file, index) => (
@@ -13,8 +12,10 @@ const App = ({ children, css, js }) => (
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
-      <script src="/webpack-dev-server.js" />
-      <title>$projectName</title>
+      {shouldIncludeWebpackDevServerJs && (
+        <script src="/webpack-dev-server.js" />
+      )}
+      <title>{title}</title>
     </head>
     <body>
       <div id="mount-point">{children}</div>
@@ -31,7 +32,9 @@ App.propTypes = {
     PropTypes.arrayOf(PropTypes.node)
   ]),
   css: PropTypes.array,
-  js: PropTypes.array
+  js: PropTypes.array,
+  shouldIncludeWebpackDevServerJs: PropTypes.bool,
+  title: PropTypes.string
 };
 
 App.defaultProps = {

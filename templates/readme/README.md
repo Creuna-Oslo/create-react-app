@@ -10,9 +10,9 @@ yarn
 
 Available scripts are defined in `package.json`. The most important ones are:
 
-* **dev**: Start development environment
-* **build**: Build bundle for production
-* **build:static**: Build static mockup site
+- **dev**: Start development environment
+- **build**: Build bundle for production using a dynamic backend
+- **build:static**: Build static site
 
 Example:
 
@@ -24,62 +24,112 @@ yarn dev
 
 The `build` script outputs files to `./dist`. Important files to know about:
 
-* `client.js`: This is where all of your authored code ends up.
-* `vendor.js`: All of your `npm`-dependencies.
-* `server.js`: Bundle for server-side rendering the React-components. It contains everything from `client.js` and `vendor.js`.
-* `style.css`: Compiled Sass
-* `manifest.json`: Contains a list of mappings from source file to emitted file
+- `client.js`: This is where all of your authored code ends up.
+- `vendor.js`: All of your `npm`-dependencies.
+- `server.js`: Bundle for server-side rendering the React-components. It contains everything from `client.js` and `vendor.js`, minus some unneeded polyfills. This is not output when building a static site.
+- `style.css`: Compiled Sass
+- `manifest.json`: Contains a list of mappings from source file to emitted file
 
-Both `client.js` and `vendor.js` should be served to the client. Because of the file hashing, these can be cached indefinitely in the browser.
+Both `client.js` and `vendor.js` should be served to the client. Because we do chunk hashing, these can be cached indefinitely.
 
-`server.js` has all React components defined in a global `Components` object.
+When building for a dynamic backend, `server.js` will have all React components defined in a global `Components` object.
 
-On the backend, use `manifest.json` to get the latest version of the built files.
+On the backend, use `manifest.json` to look up which files to load and serve.
 
 ## Generated files
 
-* `./source/app.components.js`: This file exports all components directly descending `source/components` where the name of the folder and the name of the `.jsx` file are the same. This file is included in all of the javascript bundles.
-* `./source/mockup/pages/pages.js`: Exports all of the components in `source/mockup/pages`. It is used to build the front page of the mockup.
+- `./source/app.components.js`: This file exports all components directly descending `source/components` where the name of the folder and the name of the `.jsx` file are the same. This file is included in all of the javascript bundles.
+- `./source/static-site/pages/pages.js`: Exports all of the components in `source/static-site/pages`. It is used to build the static site.
+- `./source/static-site/pages/paths.js`: Exports all of the paths to the static site pages. It is used to build the static site.
 
 ## Development
 
 ### React components
 
-Put React components in `source/components`. These components won't do much on their own, so it's useful to add some mockup pages to `source/mockup/pages` to have somewhere to render your components while developing them.
+Put React components in `source/components`. It is recommended to have each component in a separate folder, containing a `jsx` file, a `scss` file and an `index.js` file.
 
-Every folder in `source/mockup/pages` that has a react component will be rendered to an HTML page when running `yarn dev`. When adding a new page, you have to run `yarn dev` again in order for your new page to be visible on the front page.
+If the folder and the `jsx` file have the same name, the component will be included in the generated `app.components.js` file which can be used to render components on a backend (like ReactJS.NET).
 
-By default, links on the home page will be generated from the component names of the mockup pages. You can override these names by adding a comment at the top of the `.jsx` file. You can group pages together by using a forward slash in this comment.
+When building a static site, `app.components.js` is not generated and `server.js` is not output as part of the build.
 
-article-page.jsx:
+### Aliases
 
-```jsx
-// Redaksjonelle sider/Artikkelside
+By default, two aliases are included in `webpack.config`:
+
+- `components` which resolves to `source/components`
+- `js` which resolves to `source/js`
+
+These aliases allow you to import like this from any `js`/`jsx` file:
+
+```
+import SomeComponent from 'components/some-component';
+import someScript from 'js/some-script';
 ```
 
-This will cause the group 'Redaksjonelle sider' to appear on the front page, with a link to 'Artikkelside', which points to `article-page.html`.
+These aliases are also included in `jsconfig.json` which makes VS Code resolve the aliases, giving you autocomplete.
 
-You can put global things in `source/mockup/layout.jsx` so you don't have to repeat them for every page.
+### Static Site
 
-It's recommended to put mock data in a `.json` file in the same folder as the mockup page component. Check out the provided example page!
+All static site pages (`source/static-site/pages`) that have a folder and a component named the same, as well as an `index.js` file, will get a link in the page index (found by default at `/`). You can customize the name, group name, and path of the page in the page's `jsx` file by adding frontmatter to the first line like this:
+
+```js
+/*
+group: Custom group name
+name: Custom page name
+path: /custom-path
+*/
+```
+
+All properties are optional.
+
+Pages with the same group name will be grouped under this name.
+
+#### Assets
+
+Put your assets like fonts, icons and logos in `source/assets`. Static site content assets can be put in `source/static-site/assets`. Webpack copies everything from there to `/static-site/assets`, so you can refer to your static content files like this:
+
+```json
+{
+  "imageUrl": "/static-site/assets/my-image.jpg"
+}
+```
+
+#### API Responses
+
+Webpack will copy everything from `source/static-site/api` to `/static-static/api` so you can reference your static API responses like this:
+
+```json
+{
+  "apiEndpoint": "/static-site/api/register-user.json"
+}
+```
 
 ### Styles
 
 The main entry point for styles is `source/scss/styles.scss`. This file imports any and all `.scss` files in `source/components`. After adding new `.scss` files you need to run `yarn dev` again in order for them to be discovered.
 
-### Mock content
+## Input detection
 
-Put your mock assets (images etc.) in `source/mockup/assets` and your mock API responses in `source/mockup/api`. The contents of these folders are copied to `/mockup/assets` and `/mockup/api` (relative to the build directory) when building.
+`js/input-detection.js` is included. It checks for mouse, touch and keyboard events and puts classes on `<html>`:
 
-Example:
+- `.mouse-user`: The last event was either a mouse or touch event (this is removed when a keyboard event occurs)
+- `.touchevents`: The last event was a touch event
+- `.no-touchevents`: The last event was not a touch event
 
-```json
-{
-  "imageUrl": "/mockup/assets/my-image.jpg",
-  "apiEndpointUrl": "/mockup/api/api-endpoint.json"
-}
-```
+By default, all focus outlines are disabled when the `.mouse-user` class is present (in `site.scss`). No class names are present if js is disabled in the browser, meaning focus outlines are preserved.
+
+You can use these classnames to provide alternative styling based on input method (like disabling hover effects for touch screens).
 
 ## Code formatting
 
 `./.eslintrc.json` includes config for using [prettier](https://prettier.io) to format your source code. In addition to making your code look pretty, this helps to enforce a consistent coding style within your project. There are plugins for Prettier to most of the major editors (like [VS code](https://code.visualstudio.com) or [Sublime](https://www.sublimetext.com)). You should install the Prettier-pugin for your editor. It is very nice.
+
+## UI Testing
+
+[TestCafé](https://devexpress.github.io/testcafe/) is included for easy end to end testing. There is an example test provided in `/tests/example-page.js`.
+
+### Things to note
+
+- run tests with `yarn test:ui` or `npm run test:ui`
+  - The development server must already be running for this to work (`yarn dev` or `npm run dev`)
+- TestCafé will find and run all tests in located directly in `./tests`

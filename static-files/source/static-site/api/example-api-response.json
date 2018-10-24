@@ -1,0 +1,10 @@
+{
+  "analytics": {
+    "event": "test"
+  },
+  "messageToUser": "The API request went well!",
+  "success": true,
+  "payload": {
+    "text": "Put your static site API responses in 'static-site/api'. You can then use them with the API helper. For instance: api.excecute('static-site/api/example-api-response.json').then(response => {})"
+  }
+}

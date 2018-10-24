@@ -63,8 +63,7 @@ function get(endpoint) {
 }
 
 function execute(endpoint, data) {
-  if (endpoint.indexOf('/mockup/api') !== -1) {
-    console.log('Requesting mock data from', endpoint, data); // eslint-disable-line no-console
+  if (endpoint.indexOf('/static-site/api') !== -1) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(request(endpoint, defaultFetchOptions));

@@ -1,10 +1,4 @@
-/*eslint no-unused-vars: 0*/
-import get from 'lodash/get';
-import merge from 'lodash/merge';
-
 import isRunningOnClient from '@creuna/utils/is-running-on-client';
-import stripUndefined from '@creuna/utils/strip-undefined';
-import tryParseJson from '@creuna/utils/try-parse-json';
 
 /* NOTE: Implement Google Tag Manager for this module to work correctly
 
@@ -16,8 +10,6 @@ import tryParseJson from '@creuna/utils/try-parse-json';
   Copy the following snippet and paste it immediately after the opening <body> tag on every page of your website
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none visibility:hidden"></iframe></noscript>
 */
-
-// NOTE: See https://docs.google.com/spreadsheets/d/1Q5eLVcFdGxVhnz-17I_V77QQeCZPPum7PwAeuMkwFms/ for the initial/incomplete/confusing tracking spec.
 
 function Timeout(fn, delay) {
   const id = setTimeout(() => {
