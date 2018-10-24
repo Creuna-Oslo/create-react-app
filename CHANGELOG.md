@@ -1,3 +1,9 @@
+# 5.0.0
+
+[https://github.com/Creuna-Oslo/create-react-app/pull/41]()
+
+- Reworks static site generation to be a more cromulent alternative for deployed sites and not just development
+
 # 4.1.1
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/42]()
