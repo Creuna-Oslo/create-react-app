@@ -1,3 +1,8 @@
+# 5.0.2
+
+- Removes `targets` from `@babel/preset-env` options
+- Updates browser support query in `browserslist`
+
 # 5.0.1
 
 - Removes `.creunarc.json` from the scaffolded project.
