@@ -14,11 +14,9 @@ function getPathsAndOptions() {
 }
 
 test('Writes files', async t => {
-  t.plan(2);
-
   const { paths, options } = getPathsAndOptions();
 
-  await t.notThrows(() => writeFiles(options.allModules));
+  await writeFiles(options.allModules);
 
   const expectedFiles = [
     '.babelrc',
@@ -36,7 +34,6 @@ test('Writes files', async t => {
     'tests',
     'webpack.config.js'
   ];
-  console.log(fs.readdirSync(paths.build));
 
   t.deepEqual(
     expectedFiles,
