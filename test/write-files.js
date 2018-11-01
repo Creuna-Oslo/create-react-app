@@ -36,6 +36,7 @@ test('Writes files', async t => {
     'tests',
     'webpack.config.js'
   ];
+  console.log(fs.readdirSync(paths.build));
 
   t.deepEqual(
     expectedFiles,
