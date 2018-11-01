@@ -5,7 +5,7 @@ const tempy = require('tempy');
 const { join } = path;
 
 module.exports = function() {
-  const buildPath = join(tempy.directory());
+  const buildPath = tempy.directory();
   const componentsPath = join(buildPath, 'source', 'components');
   const jsPath = join(buildPath, 'source', 'js');
 

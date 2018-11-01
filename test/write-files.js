@@ -14,13 +14,31 @@ function getPathsAndOptions() {
 }
 
 test('Writes files', async t => {
-  t.plan(2);
-
   const { paths, options } = getPathsAndOptions();
 
-  await t.notThrows(() => writeFiles(options.allModules));
+  await writeFiles(options.allModules);
 
-  t.snapshot(fs.readdirSync(paths.build).filter(path => path !== '.DS_Store'));
+  const expectedFiles = [
+    '.babelrc',
+    '.editorconfig',
+    '.eslintignore',
+    '.eslintrc.json',
+    '.gitignore',
+    '.prettierignore',
+    'README.md',
+    'browserslist',
+    'jsconfig.json',
+    'package.json',
+    'scripts',
+    'source',
+    'tests',
+    'webpack.config.js'
+  ];
+
+  t.deepEqual(
+    expectedFiles,
+    fs.readdirSync(paths.build).filter(path => path !== '.DS_Store')
+  );
 });
 
 test('Writes info to package.json', async t => {
