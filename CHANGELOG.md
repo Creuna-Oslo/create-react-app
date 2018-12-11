@@ -1,3 +1,10 @@
+# 5.0.3
+
+[https://github.com/Creuna-Oslo/create-react-app/pull/55]()
+
+- Fixes CSS minification
+- Upgrades `testcafe`
+
 # 5.0.2
 
 - Removes `targets` from `@babel/preset-env` options
