@@ -6,6 +6,7 @@ const autoprefixer = require('autoprefixer');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const cssnano = require('cssnano');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
@@ -98,13 +99,15 @@ module.exports = (env = {}, options = {}) => {
               loader: 'css-loader',
               options: {
                 importLoaders: 1,
-                minimize: isProduction,
                 sourceMap: true
               }
             },
             {
               loader: 'postcss-loader',
-              options: { plugins: [autoprefixer], sourceMap: true }
+              options: {
+                plugins: [autoprefixer].concat(isProduction ? [cssnano] : []),
+                sourceMap: true
+              }
             },
             { loader: 'resolve-url-loader' },
             { loader: 'sass-loader', options: { sourceMap: true } }
