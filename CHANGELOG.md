@@ -1,3 +1,9 @@
+# 5.0.4
+
+[https://github.com/Creuna-Oslo/create-react-app/pull/56]()
+
+- Fixes file hashing not working as expected.
+
 # 5.0.3
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/55]()
