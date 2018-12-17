@@ -8,10 +8,10 @@ const prettier = require('prettier');
 const prettierConfig = require('./prettier-config');
 
 function writeFile(filePath, fileContent) {
-  const fileName = filePath[filePath.length - 1];
+  const fileName = path.basename(filePath);
 
   fs.writeFile(
-    path.join.apply(null, [__dirname, ...filePath]),
+    filePath,
     prettier.format(fileContent, prettierConfig),
     {},
     err => {
