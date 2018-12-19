@@ -4,20 +4,19 @@ const path = require('path');
 const frontmatter = require('./frontmatter');
 const kebabToPascal = require('@creuna/utils/kebab-to-pascal').default;
 
-function getComponentMetadata(item) {
-  const slugs = item.path.split(path.sep);
-  const folderSlugs = slugs.slice(0, slugs.length - 1);
-  const indexFile = folderSlugs.concat('index.js').join(path.sep);
-  const fileName = slugs[slugs.length - 1].replace('.jsx', '');
-  const folderName = slugs[slugs.length - 2];
+function getComponentMetadata(filePath) {
+  const folderPath = path.dirname(filePath);
+  const indexFile = path.join(folderPath, 'index.js');
+  const fileName = path.basename(filePath, '.jsx');
+  const folderName = path.basename(folderPath);
 
   if (fileName === folderName && fs.existsSync(indexFile)) {
     const componentName =
       folderName[0] === folderName[0].toUpperCase()
         ? folderName
-        : kebabToPascal(slugs[slugs.length - 2]);
+        : kebabToPascal(folderName);
 
-    const componentFileContent = fs.readFileSync(slugs.join(path.sep), {
+    const componentFileContent = fs.readFileSync(filePath, {
       encoding: 'utf-8'
     });
 
@@ -31,8 +30,7 @@ function getComponentMetadata(item) {
       folderName,
       group,
       name,
-      path: url.startsWith('/') ? url : '/' + url,
-      slugs
+      path: url.startsWith('/') ? url : '/' + url
     };
   }
 
