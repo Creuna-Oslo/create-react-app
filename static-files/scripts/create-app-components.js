@@ -37,8 +37,9 @@ try {
   }, {});
 
   const importStatements = Object.entries(components).reduce(
-    (accumulator, [name, path]) =>
-      accumulator + `import ${name} from '${path.replace(/\\/g, '/')}';\n`,
+    (accumulator, [name, folderPath]) =>
+      accumulator +
+      `import ${name} from '${folderPath.replace(/\\/g, '/')}';\n`,
     ''
   );
 
