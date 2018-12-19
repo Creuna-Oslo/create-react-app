@@ -7,8 +7,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const cssnano = require('cssnano');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const SuppressChunksPlugin = require('suppress-chunks-webpack-plugin').default;
 
@@ -94,7 +94,10 @@ module.exports = (env = {}, options = {}) => {
         {
           test: /\.scss$/,
           exclude: /node_modules/,
-          use: ExtractTextPlugin.extract([
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader
+            },
             {
               loader: 'css-loader',
               options: {
@@ -111,7 +114,7 @@ module.exports = (env = {}, options = {}) => {
             },
             { loader: 'resolve-url-loader' },
             { loader: 'sass-loader', options: { sourceMap: true } }
-          ])
+          ]
         },
         {
           test: /\.(svg|png|jpg|woff2?|ttf|eot)$/,
@@ -132,7 +135,9 @@ module.exports = (env = {}, options = {}) => {
       }
     },
     plugins: [
-      new ExtractTextPlugin('[name].[chunkhash].css'),
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css'
+      }),
       new ManifestPlugin(),
       new SuppressChunksPlugin(
         [

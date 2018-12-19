@@ -1,6 +1,6 @@
 const fs = require('fs');
 const fsExtra = require('fs-extra');
-const test = require('ava');
+const { serial: test } = require('ava');
 
 const { writeFiles } = require('../index');
 const getOptions = require('../fixtures/get-options');
