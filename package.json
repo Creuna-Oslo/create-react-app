@@ -43,7 +43,6 @@
     "tempy": "^0.2.1"
   },
   "dependencies": {
-    "@creuna/codegen": "^0.1.0",
     "chalk": "^2.1.0",
     "fs-extra": "^7.0.0",
     "prettier": "^1.9.2"
