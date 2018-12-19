@@ -4,11 +4,11 @@
   "author": "$author",
   "license": "UNLICENSED",
   "scripts": {
-    "analyze": "node scripts/create-app-components && webpack --mode=production --env.analyzer",
-    "analyze:static": "node scripts/create-static-site-files && webpack --progress --mode=production --env.static --env.analyzer",
-    "build": "node scripts/create-app-components && webpack --mode=production",
-    "build:static": "node scripts/create-static-site-files && webpack --mode=production --env.static",
-    "dev": "node scripts/create-static-site-files && webpack-dev-server --mode=development --env.static",
+    "analyze": "node codegen/components && webpack --mode=production --env.analyzer",
+    "analyze:static": "node codegen/pages && webpack --progress --mode=production --env.static --env.analyzer",
+    "build": "node codegen/components && webpack --mode=production",
+    "build:static": "node codegen/pages && webpack --mode=production --env.static",
+    "dev": "node codegen/pages && webpack-dev-server --mode=development --env.static",
     "lint": "eslint --ext js,jsx ./source",
     "lint:fix": "eslint --ext js,jsx ./source --fix",
     "test:ui": "testcafe chrome:headless ./tests/*.js"
