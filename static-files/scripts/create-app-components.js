@@ -26,7 +26,9 @@ try {
   }).reduce((accumulator, { path: filePath }) => {
     const { componentName } = getComponentMetadata(filePath);
 
-    if (!componentName) return accumulator;
+    if (!componentName) {
+      return accumulator;
+    }
 
     return {
       ...accumulator,
