@@ -1,3 +1,11 @@
+# 5.1.0
+
+[https://github.com/Creuna-Oslo/create-react-app/pull/58]()
+
+- Adds `@creuna/codegen` in favor of local code generation scripts
+- `pages.js` and `paths.js` are written to `source/static-site` instead of `source/static-site-pages`
+- Removes some unused dependencies
+
 # 5.0.4
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/56]()
