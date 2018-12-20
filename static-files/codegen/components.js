@@ -10,10 +10,12 @@ const disclaimers = [
   '// NOTE: The imported/exported components are exposed to the global scope'
 ].join('\n');
 
+const sourcePath = path.join(__dirname, '..', 'source');
+
 createComponentsFile({
-  componentsPath: path.join(__dirname, '..', 'source', 'components'),
   fileHeader: disclaimers,
   fileName: 'app.components.js',
-  outputPath: path.resolve(__dirname, '..', 'source'),
-  prettierOptions: eslintConfig.rules['prettier/prettier'][1]
+  outputPath: sourcePath,
+  prettierOptions: eslintConfig.rules['prettier/prettier'][1],
+  searchPath: path.join(sourcePath, 'components')
 });
