@@ -160,7 +160,7 @@ module.exports = (env = {}, options = {}) => {
                 locals: {
                   isProduction
                 },
-                paths: require('./source/static-site/pages/paths')
+                paths: require('./source/static-site/paths')
               }),
               new CopyWebpackPlugin(
                 [

@@ -4,7 +4,7 @@ path: /
 */
 import React from 'react';
 
-import pages from '../pages.js';
+import pages from '../../pages.js';
 
 const PageIndex = () => {
   const groups = {};

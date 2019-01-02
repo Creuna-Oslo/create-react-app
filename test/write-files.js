@@ -27,9 +27,9 @@ test('Writes files', async t => {
     '.prettierignore',
     'README.md',
     'browserslist',
+    'codegen',
     'jsconfig.json',
     'package.json',
-    'scripts',
     'source',
     'tests',
     'webpack.config.js'
