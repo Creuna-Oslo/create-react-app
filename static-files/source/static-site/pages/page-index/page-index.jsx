@@ -7,20 +7,17 @@ import React from 'react';
 import pages from '../../pages.js';
 
 const PageIndex = () => {
-  const groups = {};
+  const groups = pages.reduce((accumulator, page) => {
+    const group = accumulator[page.group] || [];
+    return { ...accumulator, [page.group]: group.concat(page) };
+  }, {});
 
-  pages.forEach(page => {
-    if (!groups[page.group]) {
-      groups[page.group] = [];
-    }
-
-    groups[page.group].push(page);
-  });
-
-  const pageGroups = Object.keys(groups).map(groupName => ({
-    name: groupName,
-    pages: groups[groupName]
-  }));
+  const pageGroups = Object.entries(groups)
+    .map(([groupName, pages]) => ({
+      name: groupName,
+      pages: pages.sort((a, b) => a.name.localeCompare(b.name))
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div
