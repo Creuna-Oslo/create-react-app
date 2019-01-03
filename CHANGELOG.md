@@ -1,3 +1,9 @@
+# 5.2.0
+
+[https://github.com/Creuna-Oslo/create-react-app/pull/59]()
+
+- Adds sorting of pages by display name on the index page
+
 # 5.1.0
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/58]()
