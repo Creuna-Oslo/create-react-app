@@ -39,6 +39,7 @@
     "arrow-parens": [1, "as-needed"],
     "no-dupe-keys": 2,
     "no-dupe-args": 2,
-    "semi": 1
+    "semi": 1,
+    "end-of-line": "auto"
   }
 }
