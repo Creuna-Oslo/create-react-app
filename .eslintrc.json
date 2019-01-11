@@ -21,7 +21,7 @@
       "warn",
       {
         "singleQuote": true,
-        "end-of-line": "auto"
+        "endOfLine": "auto"
       }
     ],
     "strict": 0,
