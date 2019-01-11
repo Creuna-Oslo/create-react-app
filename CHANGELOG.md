@@ -1,3 +1,9 @@
+# 5.2.1
+
+[https://github.com/Creuna-Oslo/create-react-app/pull/62]()
+
+- Fixes generated prettier end-of-line warnings on windows when running webpack
+
 # 5.2.0
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/60]()
