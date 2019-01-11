@@ -20,7 +20,8 @@
     "prettier/prettier": [
       "warn",
       {
-        "singleQuote": true
+        "singleQuote": true,
+        "end-of-line": "auto"
       }
     ],
     "strict": 0,
@@ -39,7 +40,6 @@
     "arrow-parens": [1, "as-needed"],
     "no-dupe-keys": 2,
     "no-dupe-args": 2,
-    "semi": 1,
-    "end-of-line": "auto"
+    "semi": 1
   }
 }
