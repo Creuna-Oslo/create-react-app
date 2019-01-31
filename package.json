@@ -1,6 +1,6 @@
 {
   "name": "@creuna/create-react-app",
-  "version": "5.2.1",
+  "version": "5.2.2",
   "author": {
     "name": "Asbjorn Hegdahl",
     "email": "asbjorn.hegdahl@creuna.no"
@@ -35,16 +35,16 @@
     "test": "ava --verbose"
   },
   "devDependencies": {
-    "ava": "1.0.0-beta.8",
-    "babel-eslint": "^10.0.0",
-    "eslint": "^5.5.0",
-    "eslint-config-prettier": "^3.0.1",
-    "eslint-plugin-prettier": "^2.4.0",
+    "ava": "^1.2.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "tempy": "^0.2.1"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
-    "fs-extra": "^7.0.0",
-    "prettier": "^1.9.2"
+    "chalk": "^2.4.2",
+    "fs-extra": "^7.0.1",
+    "prettier": "^1.16.3"
   }
 }
