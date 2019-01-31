@@ -1,3 +1,7 @@
+# 5.2.2
+
+- Upgrade all dependencies
+
 # 5.2.1
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/62]()
