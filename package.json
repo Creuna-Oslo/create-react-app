@@ -38,7 +38,7 @@
     "ava": "^1.2.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.12.1",
-    "eslint-config-prettier": "^3.0.1",
+    "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^2.4.0",
     "tempy": "^0.2.1"
   },
