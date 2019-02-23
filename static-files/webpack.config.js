@@ -7,6 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const cssnano = require('cssnano');
+const DirectoryNamedPlugin = require('directory-named-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
@@ -132,7 +133,16 @@ module.exports = (env = {}, options = {}) => {
       alias: {
         components: path.resolve(__dirname, 'source/components'),
         js: path.resolve(__dirname, 'source/js')
-      }
+      },
+      plugins: [
+        new DirectoryNamedPlugin({
+          honorIndex: true,
+          include: [
+            path.resolve('./source/components'),
+            path.resolve('./source/static-site/pages')
+          ]
+        })
+      ]
     },
     plugins: [
       new MiniCssExtractPlugin({
