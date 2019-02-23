@@ -1,5 +1,7 @@
 # 5.3.0
 
+[https://github.com/Creuna-Oslo/create-react-app/pull/65]()
+
 - Adds `directory-named-webpack-plugin` to scaffolded project.
 
 # 5.2.2
