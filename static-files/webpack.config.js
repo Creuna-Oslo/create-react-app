@@ -68,7 +68,7 @@ module.exports = (env = {}, options = {}) => {
     })(),
     output: (() => {
       const output = {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve('./dist'),
         filename: '[name].[chunkhash].js'
       };
 
@@ -131,8 +131,8 @@ module.exports = (env = {}, options = {}) => {
     resolve: {
       extensions: ['.js', '.jsx', '.scss'],
       alias: {
-        components: path.resolve(__dirname, 'source/components'),
-        js: path.resolve(__dirname, 'source/js')
+        components: path.resolve('./source/components'),
+        js: path.resolve('./source/js')
       },
       plugins: [
         new DirectoryNamedPlugin({
