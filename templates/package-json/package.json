@@ -20,7 +20,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@creuna/codegen": "^0.2.2",
+    "@creuna/codegen": "^0.2.3",
     "@creuna/utils": "^1.1.0",
     "autoprefixer": "^9.1.5",
     "babel-eslint": "^10.0.1",
