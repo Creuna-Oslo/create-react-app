@@ -1,3 +1,7 @@
+# 5.3.0
+
+- Adds `directory-named-webpack-plugin` to scaffolded project.
+
 # 5.2.2
 
 - Upgrade all dependencies
