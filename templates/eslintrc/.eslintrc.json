@@ -20,6 +20,7 @@
     "prettier/prettier": [
       "warn",
       {
+        "endOfLine": "auto",
         "singleQuote": true
       }
     ],
