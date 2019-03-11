@@ -129,7 +129,7 @@ module.exports = (env = {}, options = {}) => {
       ]
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.scss'],
+      extensions: ['.js', '.jsx'],
       alias: {
         components: path.resolve('./source/components'),
         js: path.resolve('./source/js')
