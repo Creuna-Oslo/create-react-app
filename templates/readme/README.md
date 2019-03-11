@@ -61,10 +61,10 @@ Also, `directory-named-webpack-plugin` is used to automatically import files tha
 
 ```js
 // <project root>/source/components/some-component/some-component.jsx
-import SomeComponent from "components/some-component";
+import SomeComponent from "components/some-component"; // 'components' alias and directory-named-webpack-plugin
 
 // <project root>/source/js/some-script.js
-import someScript from "js/some-script";
+import someScript from "js/some-script"; // 'js' alias
 ```
 
 The aliases are also included in `jsconfig.json` which makes VS Code resolve the same aliases, giving you autocomplete.
