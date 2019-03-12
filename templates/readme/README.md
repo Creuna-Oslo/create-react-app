@@ -46,31 +46,32 @@ On the backend, use `manifest.json` to look up which files to load and serve.
 
 ### React components
 
-Put React components in `source/components`. It is recommended to have each component in a separate folder, containing a `jsx` file, a `scss` file and an `index.js` file.
-
-If the folder and the `jsx` file have the same name, the component will be included in the generated `app.components.js` file which can be used to render components on a backend (like ReactJS.NET).
+Put React components in `source/components`. If the folder and the `jsx` file have the same name, the component will be included in the generated `app.components.js` file which can be used to render components on a backend (like ReactJS.NET).
 
 When building a static site, `app.components.js` is not generated and `server.js` is not output as part of the build.
 
-### Aliases
+### Import paths
 
-By default, two aliases are included in `webpack.config`:
+`webpack.config` specifies two aliases (under `resolve.alias`) that make importing files easier:
 
 - `components` which resolves to `source/components`
 - `js` which resolves to `source/js`
 
-These aliases allow you to import like this from any `js`/`jsx` file:
+Also, `directory-named-webpack-plugin` is used to automatically import files that have the same name as their containing folder. Examples:
 
-```
-import SomeComponent from 'components/some-component';
-import someScript from 'js/some-script';
+```js
+// <project root>/source/components/some-component/some-component.jsx
+import SomeComponent from "components/some-component"; // 'components' alias and directory-named-webpack-plugin
+
+// <project root>/source/js/some-script.js
+import someScript from "js/some-script"; // 'js' alias
 ```
 
-These aliases are also included in `jsconfig.json` which makes VS Code resolve the aliases, giving you autocomplete.
+The aliases are also included in `jsconfig.json` which makes VS Code resolve the same aliases, giving you autocomplete.
 
 ### Static Site
 
-All static site pages (`source/static-site/pages`) that have a folder and a component named the same, as well as an `index.js` file, will get a link in the page index (found by default at `/`). You can customize the name, group name, and path of the page in the page's `jsx` file by adding frontmatter to the first line like this:
+All static site pages (`source/static-site/pages`) that have a folder and a component with the same name, will get a link in the page index (found by default at `/`). You can customize the name, group name, and path of the page in the page's `jsx` file by adding frontmatter to the first line like this:
 
 ```js
 /*

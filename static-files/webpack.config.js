@@ -7,6 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const cssnano = require('cssnano');
+const DirectoryNamedPlugin = require('directory-named-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
@@ -67,7 +68,7 @@ module.exports = (env = {}, options = {}) => {
     })(),
     output: (() => {
       const output = {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve('./dist'),
         filename: '[name].[chunkhash].js'
       };
 
@@ -128,11 +129,20 @@ module.exports = (env = {}, options = {}) => {
       ]
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.scss'],
+      extensions: ['.js', '.jsx'],
       alias: {
-        components: path.resolve(__dirname, 'source/components'),
-        js: path.resolve(__dirname, 'source/js')
-      }
+        components: path.resolve('./source/components'),
+        js: path.resolve('./source/js')
+      },
+      plugins: [
+        new DirectoryNamedPlugin({
+          honorIndex: true,
+          include: [
+            path.resolve('./source/components'),
+            path.resolve('./source/static-site/pages')
+          ]
+        })
+      ]
     },
     plugins: [
       new MiniCssExtractPlugin({
