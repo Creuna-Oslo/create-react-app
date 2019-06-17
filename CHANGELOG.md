@@ -1,3 +1,9 @@
+# 5.3.1
+
+[https://github.com/Creuna-Oslo/create-react-app/pull/67]()
+
+- Adds `Go to Definition` for VS code.
+
 # 5.3.0
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/65]()
