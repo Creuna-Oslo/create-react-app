@@ -1,3 +1,8 @@
+# 5.3.2
+
+- Fixes [issue 69](https://github.com/Creuna-Oslo/create-react-app/issues/69): Improves confusing chunk naming in webpack config
+- Fixes [issue 68](https://github.com/Creuna-Oslo/create-react-app/issues/68): Makes .gitignore less opinionated about vs code
+
 # 5.3.1
 
 [https://github.com/Creuna-Oslo/create-react-app/pull/67]()
