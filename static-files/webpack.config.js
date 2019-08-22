@@ -192,7 +192,7 @@ module.exports = (env = {}, options = {}) => {
     optimization: {
       splitChunks: {
         cacheGroups: {
-          commons: {
+          vendor: {
             test: module => {
               if (module.resource && /^.*\.(css|scss)$/.test(module.resource)) {
                 return false;
