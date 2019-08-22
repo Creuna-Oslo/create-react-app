@@ -4,6 +4,3 @@ node_modules
 source/app.components.js
 source/static-site/pages.js
 source/static-site/paths.js
-*.code-workspace
-.vscode/*
-!.vscode/tasks.json
